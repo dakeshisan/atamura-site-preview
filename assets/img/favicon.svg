@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="ATAMURA GROUP">
+  <g fill="#284157">
+    <circle cx="32" cy="32" r="17"/>
+    <circle cx="68" cy="32" r="17"/>
+    <circle cx="32" cy="68" r="17"/>
+    <circle cx="68" cy="68" r="17"/>
+  </g>
+</svg>
