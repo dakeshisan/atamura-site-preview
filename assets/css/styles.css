@@ -823,3 +823,36 @@
   /* Активный пункт меню («вы здесь») */
   .nav-main a.is-active { color: var(--brand); font-weight: 600; }
   .nav-main a.is-active::after { content: ""; display: block; height: 2px; background: var(--brand); border-radius: 2px; margin-top: 3px; }
+
+  /* ============ ГЕРОЙ «ПОИСК-ПЕРВЫЙ» (фото ЖК + панель подбора) ============ */
+  .home-hero { position: relative; min-height: 600px; overflow: hidden; display: flex; align-items: flex-end; }
+  .home-hero-bg { position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(102deg, rgba(18,30,42,.92) 0%, rgba(18,30,42,.55) 48%, rgba(18,30,42,.28) 100%),
+      url('../img/hero-atmosfera.jpg') center/cover no-repeat; }
+  .home-hero-inner { position: relative; z-index: 2; padding: 124px 0 54px; color: #fff; }
+  .hh-brand { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  .hh-title { font-size: clamp(34px, 4.8vw, 56px); font-weight: 600; line-height: 1.02; letter-spacing: -.015em; margin: 10px 0 8px; color: #fff; }
+  .hh-offer { font-size: 16px; color: #e7f0f2; margin-bottom: 24px; max-width: 48ch; }
+  .hh-offer b { color: #fff; }
+  .hh-meta { margin-top: 16px; font-size: 13px; color: #cfe0e3; } .hh-meta b { color: #fff; }
+  .hs-panel { background: #fff; border-radius: 18px; box-shadow: 0 26px 60px rgba(0,0,0,.35); padding: 20px; display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; max-width: 920px; margin-top: 0; }
+  .hs-group { display: flex; flex-direction: column; gap: 7px; }
+  .hs-label { font-size: 12px; color: var(--ink-mute); font-weight: 600; }
+  .hs-panel .hs-chips { display: flex; gap: 6px; }
+  .hs-panel .hs-chip { min-width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); font: 600 14px inherit; color: var(--ink); padding: 0 12px; cursor: pointer; }
+  .hs-panel .hs-chip.is-on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .hs-panel select { height: 44px; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; font: 500 14px inherit; background: var(--bg); color: var(--ink); }
+  .hs-panel .hs-go { margin-left: auto; height: 48px; display: inline-flex; align-items: center; }
+  @media (max-width: 820px) { .home-hero-inner { padding-top: 100px; } .hs-panel { flex-direction: column; align-items: stretch; } .hs-panel .hs-go { margin-left: 0; justify-content: center; } }
+
+  /* Прозрачная шапка поверх фото-героя (только главная, body.home) */
+  .home .util.over { position: absolute; top: 0; left: 0; right: 0; z-index: 40; background: transparent; border-color: rgba(255,255,255,.18); }
+  .home .util.over .util-tabs a, .home .util.over .city { color: rgba(255,255,255,.92); }
+  .home .util.over .util-tabs a[data-soon] { color: rgba(255,255,255,.5); }
+  .home .head.over { position: absolute; top: 38px; left: 0; right: 0; z-index: 40; background: transparent; backdrop-filter: none; }
+  .home .head.over .nav-main a { color: #fff; }
+  .home .head.over .nav-main a.nav-consult { color: #bfe9ef; }
+  .home .head.over .phone-block strong a { color: #fff; }
+  .home .head.over .phone-block small { color: rgba(255,255,255,.7); }
+  .home .head.over .lang-switch, .home .head.over .icon-btn, .home .head.over .burger { color: #fff; }
+  .home .head.over .login-btn { color: #fff; border-color: rgba(255,255,255,.4); }

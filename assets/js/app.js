@@ -437,11 +437,12 @@
   /* ---------- Инлайн-поиск в герое ---------- */
   function bindHeroSearch() {
     var hs = document.querySelector(".herosearch"); if (!hs) return;
-    var picked = [], go = byId("hs-go"), zk = hs.querySelector('select[name="zk"]');
+    var picked = [], go = byId("hs-go"), zk = hs.querySelector('select[name="zk"]'), pmax = hs.querySelector('select[name="pmax"]');
     function build() {
       var p = new URLSearchParams();
       if (picked.length) p.set("rooms", picked.join(","));
       if (zk && zk.value) p.set("zk", zk.value);
+      if (pmax && pmax.value) p.set("pmax", pmax.value);
       go.setAttribute("href", "flats.html" + (p.toString() ? "?" + p.toString() : ""));
     }
     hs.querySelectorAll(".hs-chip").forEach(function (b) {
@@ -452,6 +453,7 @@
       });
     });
     if (zk) zk.addEventListener("change", build);
+    if (pmax) pmax.addEventListener("change", build);
     build();
   }
 
