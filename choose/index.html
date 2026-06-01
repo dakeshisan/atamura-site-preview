@@ -1,0 +1,42 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ATAMURA — выбор первого экрана</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#284157;--teal:#007484;--gold:#CFB372;--cream:#F7F5EE;--ink:#1E1E1E;--mute:#9fb4bd}
+body{font-family:'Jost',system-ui,sans-serif;background:linear-gradient(160deg,#1c2e3f,#0a4e5a);color:#fff;min-height:100vh;padding:40px 20px 70px}
+.head{max-width:1260px;margin:0 auto 26px}
+.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h1{font-size:34px;font-weight:600;margin:8px 0 6px}
+.head p{color:var(--mute);font-size:15px;max-width:70ch;line-height:1.55}
+.head .hint{margin-top:10px;font-size:13px;color:#cfe3e6}
+.grid{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;max-width:1300px;margin:0 auto}
+.opt{width:600px;max-width:100%}
+.lbl{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.badge{width:34px;height:34px;border-radius:50%;background:var(--gold);color:#3a2f12;font-weight:700;display:grid;place-items:center;font-size:16px;flex-shrink:0}
+.lbl b{font-size:17px;font-weight:600}
+.lbl span{font-size:13px;color:var(--mute)}
+.tag{margin-left:auto;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
+.tag.ok{background:rgba(40,200,120,.18);color:#86e6b0;border:1px solid rgba(40,200,120,.35)}
+.tag.ph{background:rgba(207,179,114,.16);color:#e9d3a6;border:1px solid rgba(207,179,114,.4)}
+.frame{width:600px;height:600px;max-width:100%;overflow:hidden;border-radius:16px;box-shadow:0 30px 60px rgba(0,0,0,.45);background:#0a5f6e}
+.frame iframe{width:1300px;height:1300px;border:0;transform:scale(.4615);transform-origin:top left}
+@media(max-width:660px){.frame{height:auto;aspect-ratio:1/1}.frame iframe{transform:scale(.28)}}
+.foot{max-width:1260px;margin:36px auto 0;color:var(--mute);font-size:13px;text-align:center}
+</style></head><body>
+<div class="head">
+  <div class="eyebrow">ATAMURA GROUP · редизайн</div>
+  <h1>Выбор первого экрана</h1>
+  <p>Шесть направлений героя в Level-стиле, на бренд-палитре, с одной доминантной CTA. Открой, сравни — и скажи букву, я соберу её в живой сайт.</p>
+  <div class="hint">A · B · C — собираю сразу (фото не нужны). &nbsp;D · E · F — нужны реальные фото ЖК (в галерее подгружаются демо-снимки).</div>
+</div>
+<div class="grid">
+  <div class="opt"><div class="lbl"><span class="badge">A</span><b>Тихий люкс</b><span>editorial</span><span class="tag ok">сразу</span></div><div class="frame"><iframe src="a.html" loading="lazy"></iframe></div></div>
+  <div class="opt"><div class="lbl"><span class="badge">B</span><b>Иммерсивное</b><span>тёмный герой</span><span class="tag ok">сразу</span></div><div class="frame"><iframe src="b.html" loading="lazy"></iframe></div></div>
+  <div class="opt"><div class="lbl"><span class="badge">C</span><b>Калькулятор-первый</b><span>конверсия</span><span class="tag ok">сразу</span></div><div class="frame"><iframe src="c.html" loading="lazy"></iframe></div></div>
+  <div class="opt"><div class="lbl"><span class="badge">D</span><b>Фото-сплит 50/50</b><span></span><span class="tag ph">нужно фото</span></div><div class="frame"><iframe src="d.html" loading="lazy"></iframe></div></div>
+  <div class="opt"><div class="lbl"><span class="badge">E</span><b>Каталог-первый</b><span>витрина</span><span class="tag ph">нужно фото</span></div><div class="frame"><iframe src="e.html" loading="lazy"></iframe></div></div>
+  <div class="opt"><div class="lbl"><span class="badge">F</span><b>Тёплый сторителлинг</b><span>семья</span><span class="tag ph">нужно фото</span></div><div class="frame"><iframe src="f.html" loading="lazy"></iframe></div></div>
+</div>
+<div class="foot">Напиши букву (A–F) — внедрю выбранное направление в живой сайт. Для D/E/F пришли реальные фото ЖК.</div>
+</body></html>
