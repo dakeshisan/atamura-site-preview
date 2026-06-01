@@ -424,6 +424,18 @@
     window.addEventListener("load", function () { ST.refresh(); });
   }
 
+  /* ---------- Липкая шапка: прозрачная над фото → плотная при скролле ---------- */
+  function bindStickyHeader() {
+    var head = document.querySelector(".head.over"); if (!head) return;
+    var hero = document.querySelector(".home-hero");
+    function thr() { return hero ? Math.max(120, hero.offsetHeight - 90) : 200; }
+    var t = thr(), stuck = false;
+    function onScroll() { var s = window.scrollY > t; if (s !== stuck) { stuck = s; head.classList.toggle("is-stuck", s); } }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () { t = thr(); onScroll(); });
+    onScroll();
+  }
+
   /* ---------- Слайдер фонов героя (фото ЖК, кроссфейд) ---------- */
   function bindHeroSlider() {
     var box = byId("heroSlider"); if (!box) return;
@@ -487,6 +499,7 @@
     bindForms(document);
     bindScrollAnim();
     bindHeroSlider();
+    bindStickyHeader();
     bindActiveNav();
     /* Делегированный трекинг исходящих контактов (без PII) */
     document.addEventListener("click", function (e) {

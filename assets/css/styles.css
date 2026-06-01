@@ -825,7 +825,10 @@
   .nav-main a.is-active::after { content: ""; display: block; height: 2px; background: var(--brand); border-radius: 2px; margin-top: 3px; }
 
   /* ============ ГЕРОЙ «ПОИСК-ПЕРВЫЙ» (фото ЖК + панель подбора) ============ */
-  .home-hero { position: relative; min-height: 600px; overflow: hidden; display: flex; align-items: flex-end; }
+  .home-hero { position: relative; min-height: min(88vh, 860px); overflow: hidden; display: flex; align-items: flex-end; }
+  /* верхний скрим — чтобы белое меню читалось над светлой частью фото */
+  .home-hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 160px; z-index: 2; pointer-events: none;
+    background: linear-gradient(180deg, rgba(18,30,42,.55), rgba(18,30,42,0)); }
   .home-hero-bg { position: absolute; inset: 0; z-index: 0; background: var(--navy); }
   .hh-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1000ms ease; }
   .hh-slide.is-on { opacity: 1; }
@@ -862,3 +865,13 @@
   .home .head.over .phone-block small { color: rgba(255,255,255,.7); }
   .home .head.over .lang-switch, .home .head.over .icon-btn, .home .head.over .burger { color: #fff; }
   .home .head.over .login-btn { color: #fff; border-color: rgba(255,255,255,.4); }
+  /* Логотип: белый над фото, тёмный при скролле */
+  .head.over .logo-n { display: none; } .head.over .logo-w { display: block; }
+  /* Липкая плотная шапка при скролле */
+  .head.over.is-stuck { position: fixed; top: 0; background: var(--bg); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); box-shadow: 0 6px 24px rgba(40,65,87,.08); }
+  .head.over.is-stuck .logo-w { display: none; } .head.over.is-stuck .logo-n { display: block; }
+  .head.over.is-stuck .nav-main a { color: var(--ink); }
+  .head.over.is-stuck .nav-main a.nav-consult { color: var(--teal); }
+  .head.over.is-stuck .phone-block strong a, .head.over.is-stuck .lang-switch, .head.over.is-stuck .icon-btn, .head.over.is-stuck .burger { color: var(--ink); }
+  .head.over.is-stuck .phone-block small { color: var(--ink-mute); }
+  .head.over.is-stuck .login-btn { color: var(--ink); border-color: var(--line); }
