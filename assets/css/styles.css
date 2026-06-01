@@ -826,9 +826,15 @@
 
   /* ============ ГЕРОЙ «ПОИСК-ПЕРВЫЙ» (фото ЖК + панель подбора) ============ */
   .home-hero { position: relative; min-height: 600px; overflow: hidden; display: flex; align-items: flex-end; }
-  .home-hero-bg { position: absolute; inset: 0; z-index: 0;
-    background: linear-gradient(102deg, rgba(18,30,42,.92) 0%, rgba(18,30,42,.55) 48%, rgba(18,30,42,.28) 100%),
-      url('../img/hero-atmosfera.jpg') center/cover no-repeat; }
+  .home-hero-bg { position: absolute; inset: 0; z-index: 0; background: var(--navy); }
+  .hh-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1000ms ease; }
+  .hh-slide.is-on { opacity: 1; }
+  .hh-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(102deg, rgba(18,30,42,.92) 0%, rgba(18,30,42,.55) 48%, rgba(18,30,42,.28) 100%); }
+  .hh-sliderui { position: absolute; right: 30px; bottom: 24px; z-index: 3; display: flex; align-items: center; gap: 14px; }
+  .hh-name { font-size: 13px; color: rgba(255,255,255,.85); font-weight: 500; }
+  .hh-dots { display: flex; gap: 8px; }
+  .hh-dots button { width: 9px; height: 9px; border-radius: 50%; border: 0; background: rgba(255,255,255,.4); cursor: pointer; padding: 0; transition: width 200ms, background 200ms; }
+  .hh-dots button.on { background: var(--accent); width: 24px; border-radius: 5px; }
   .home-hero-inner { position: relative; z-index: 2; padding: 124px 0 54px; color: #fff; }
   .hh-brand { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
   .hh-title { font-size: clamp(34px, 4.8vw, 56px); font-weight: 600; line-height: 1.02; letter-spacing: -.015em; margin: 10px 0 8px; color: #fff; }

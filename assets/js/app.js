@@ -424,6 +424,28 @@
     window.addEventListener("load", function () { ST.refresh(); });
   }
 
+  /* ---------- Слайдер фонов героя (фото ЖК, кроссфейд) ---------- */
+  function bindHeroSlider() {
+    var box = byId("heroSlider"); if (!box) return;
+    var slides = [].slice.call(box.querySelectorAll(".hh-slide"));
+    if (slides.length < 2) return;
+    var nameEl = document.querySelector(".hh-name");
+    var dots = [].slice.call(document.querySelectorAll(".hh-dots button"));
+    var i = 0, timer = null;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function show(n) {
+      slides[i].classList.remove("is-on"); if (dots[i]) dots[i].classList.remove("on");
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add("is-on"); if (dots[i]) dots[i].classList.add("on");
+      if (nameEl) nameEl.textContent = slides[i].getAttribute("data-name") || "";
+    }
+    function start() { if (reduce) return; stop(); timer = setInterval(function () { show(i + 1); }, 5000); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    dots.forEach(function (d) { d.addEventListener("click", function () { show(+d.getAttribute("data-i")); start(); }); });
+    box.addEventListener("mouseenter", stop); box.addEventListener("mouseleave", start);
+    start();
+  }
+
   /* ---------- Активный пункт меню («вы здесь») ---------- */
   function bindActiveNav() {
     var f = (location.pathname.split("/").pop() || "index.html");
@@ -464,6 +486,7 @@
     bindAiHelper();
     bindForms(document);
     bindScrollAnim();
+    bindHeroSlider();
     bindActiveNav();
     /* Делегированный трекинг исходящих контактов (без PII) */
     document.addEventListener("click", function (e) {
