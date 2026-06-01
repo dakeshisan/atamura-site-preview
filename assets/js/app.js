@@ -274,7 +274,7 @@
     return '<article class="flat" data-id="' + f.id + '">' +
       '<div class="flat-photo">' + img +
         '<button class="flat-fav' + (fav ? " is-on" : "") + '" type="button" aria-label="В избранное" data-fav="' + f.id + '">' +
-          '<svg width="18" height="18" viewBox="0 0 20 20" fill="' + (fav ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="1.6"><path d="M10 17s-6-3.5-6-8a3.5 3.5 0 0 1 6-2.5A3.5 3.5 0 0 1 16 9c0 4.5-6 8-6 8z"/></svg>' +
+          '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="' + (fav ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="1.6"><path d="M10 17s-6-3.5-6-8a3.5 3.5 0 0 1 6-2.5A3.5 3.5 0 0 1 16 9c0 4.5-6 8-6 8z"/></svg>' +
         "</button>" +
         '<span class="flat-status">' + f.status + "</span>" +
       "</div>" +
@@ -317,7 +317,7 @@
           '<option value="area-asc">Площадь ↑</option><option value="area-desc">Площадь ↓</option></select></div>' +
         '<button class="cat-reset" type="button" id="cat-reset">Сбросить</button>' +
       "</div>" +
-      '<div class="cat-head"><h2 class="cat-count" id="cat-count"></h2>' +
+      '<div class="cat-head"><h2 class="cat-count" id="cat-count" aria-live="polite"></h2>' +
         '<label class="cat-favtoggle"><input type="checkbox" id="cat-fav"> Только избранное</label></div>' +
       '<div class="cat-grid" id="cat-grid"></div>' +
       '<div class="cat-empty" id="cat-empty" hidden>Под эти параметры пока нет квартир. <button class="btn btn-outline btn-sm" type="button" id="cat-empty-reset">Сбросить фильтр</button></div>';
@@ -424,6 +424,16 @@
     window.addEventListener("load", function () { ST.refresh(); });
   }
 
+  /* ---------- Активный пункт меню («вы здесь») ---------- */
+  function bindActiveNav() {
+    var f = (location.pathname.split("/").pop() || "index.html");
+    var map = { "flats.html": "flats.html", "o-kompanii.html": "o-kompanii.html", "contacts.html": "contacts.html" };
+    var key = map[f] || "index.html#projects";
+    document.querySelectorAll(".nav-main a").forEach(function (a) {
+      if ((a.getAttribute("href") || "").indexOf(key) >= 0) { a.setAttribute("aria-current", "page"); a.classList.add("is-active"); }
+    });
+  }
+
   /* ---------- Инлайн-поиск в герое ---------- */
   function bindHeroSearch() {
     var hs = document.querySelector(".herosearch"); if (!hs) return;
@@ -452,6 +462,7 @@
     bindAiHelper();
     bindForms(document);
     bindScrollAnim();
+    bindActiveNav();
     /* Делегированный трекинг исходящих контактов (без PII) */
     document.addEventListener("click", function (e) {
       var t = e.target;

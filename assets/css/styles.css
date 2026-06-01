@@ -5,7 +5,7 @@
     --card:      #FBFBFB;                  /* brandbook white */
     --ink:       #1E1E1E;                  /* brandbook black (NOT pure black) */
     --ink-soft:  #4A4A4A;
-    --ink-mute:  #888888;
+    --ink-mute:  #6E6E6E;
     --line:      #E0DDD3;
     --line-soft: #ECEAE2;
     --black:     #1E1E1E;
@@ -819,3 +819,7 @@
   .faq-item summary::after { content: "+"; font-size: 22px; font-weight: 400; color: var(--brand); flex-shrink: 0; transition: transform 200ms; }
   .faq-item[open] summary::after { transform: rotate(45deg); }
   .faq-a { padding: 0 20px 18px; color: var(--ink-soft); font-size: 14px; line-height: 1.6; max-width: 70ch; }
+
+  /* Активный пункт меню («вы здесь») */
+  .nav-main a.is-active { color: var(--brand); font-weight: 600; }
+  .nav-main a.is-active::after { content: ""; display: block; height: 2px; background: var(--brand); border-radius: 2px; margin-top: 3px; }
