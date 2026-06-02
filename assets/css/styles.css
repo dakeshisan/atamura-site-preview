@@ -312,7 +312,7 @@
   .sect-head { display: flex; justify-content: space-between; align-items: end; gap: var(--s-5); margin-bottom: var(--s-6); flex-wrap: wrap; }
   .sect-title { font-size: var(--t-h1); font-weight: 600; letter-spacing: -0.025em; line-height: 1.05; margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); }
   .sect-title-mute { color: oklch(74% 0.005 230); font-weight: 500; }
-  .sect-title-loc { display: inline-flex; align-items: center; gap: 6px; font-size: 0.66em; font-weight: 500; color: var(--ink); border-bottom: 1px dashed var(--ink-mute); padding-bottom: 2px; }
+  .sect-title-loc { display: inline-flex; align-items: center; gap: 6px; font-size: 0.66em; font-weight: 500; color: var(--ink); }
 
   .toggle { width: 48px; height: 28px; background: var(--ink); border: 0; border-radius: var(--r-pill); position: relative; padding: 0; cursor: pointer; flex-shrink: 0; }
   .toggle::after { content: ''; position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: oklch(98% 0 0); transition: transform 200ms cubic-bezier(.2,.9,.25,1); }
