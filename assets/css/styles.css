@@ -907,3 +907,12 @@
     .float-btn { width: 48px; height: 48px; }
     .sticky-bar.is-on ~ .floater { bottom: 80px; }
   }
+
+  /* Засечные заголовки — Cormorant (премиум / «наследие»). Текст, интерфейс и числа остаются Jost. */
+  .hh-title, .sect-title, .pagehero-title, .zk-h2,
+  .content h2, .reviews h2, .news h2, .premium-row h2, .mortgage-info h2, .help-cta h3 {
+    font-family: 'Cormorant', Georgia, 'Times New Roman', serif;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+  .hh-title { font-weight: 600; }
