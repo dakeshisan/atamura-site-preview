@@ -505,6 +505,9 @@
   .float-btn { width: 56px; height: 56px; border-radius: 50%; border: 0; display: grid; place-items: center; box-shadow: 0 6px 20px oklch(0% 0 0 / 0.15); transition: 200ms cubic-bezier(.2,.9,.25,1); color: oklch(98% 0 0); position: relative; }
   .float-btn:hover { transform: scale(1.08); }
   .float-btn.is-tg { background: var(--tg); }
+  /* WhatsApp-пузырь: показываем только ≤980px, где скрыт .head-cta (на десктопе WhatsApp есть в шапке) */
+  .float-btn.is-wa { background: #25D366; display: none; }
+  .float-btn.is-wa svg { width: 26px; height: 26px; }
   .float-btn.is-ai { background: linear-gradient(135deg, var(--ai-grad-1), var(--ai-grad-2)); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; transition: background 280ms; }
   .float-btn.is-ai::before { content: ''; width: 14px; height: 14px; background: oklch(98% 0 0); mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path fill='black' d='M7 0L8 4L12 5L8 6L7 10L6 6L2 5L6 4Z'/><circle cx='12' cy='2' r='1' fill='black'/><circle cx='2' cy='12' r='1.5' fill='black'/></svg>") center/contain no-repeat; margin-right: 2px; }
 
@@ -595,6 +598,7 @@
   @media (max-width: 980px) {
     .burger { display: inline-flex; }
     .head-cta { display: none; }
+    .float-btn.is-wa { display: grid; }
     .head-utils .icon-btn { display: none; }
     .head-utils .lang-switch { display: none; }
     .phone-block { display: none; }
