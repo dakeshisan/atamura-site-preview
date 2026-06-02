@@ -889,3 +889,15 @@
     .cat-bar { flex-direction: column; align-items: stretch; }
     .cat-bar .cat-field, .cat-field-wide, .cat-field-rooms { flex: 1 1 auto; width: 100%; }
   }
+
+  /* Мобильный фикс героя: высота по контенту (не 88vh), плавающие кнопки — в угол, не на панель подбора */
+  @media (max-width: 760px) {
+    .home-hero { min-height: auto; align-items: flex-start; }
+    .home-hero::before { height: 120px; }
+    .home-hero-inner { padding: 86px 0 28px; }
+    .hh-title { font-size: clamp(30px, 8vw, 40px); }
+    .hh-meta { font-size: 12px; line-height: 1.45; }
+    .floater { bottom: 18px; right: 14px; }
+    .float-btn { width: 48px; height: 48px; }
+    .sticky-bar.is-on ~ .floater { bottom: 80px; }
+  }

@@ -212,7 +212,7 @@
       '<div><div class="review-name">' + rev.name + '</div><div class="review-zk">' + rev.sub + '</div></div></div></article>' : "";
     /* H1 — оценка платежа по 7-20-25 от стартовой цены ЖК */
     var payHTML = z.priceFrom ? '<div style="background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;margin-bottom:var(--s-3);font-size:14px">Ипотека по <strong>7-20-25</strong> — от <strong>' + money(payment72025(z.priceFrom)) + ' ₸/мес</strong><br><span style="font-size:12px;color:var(--ink-soft)">первый взнос 20%, срок 25 лет · ориентир, точную ставку подтверждает банк</span></div>' : "";
-    var trustLine = '<div style="margin-top:12px;font-size:12px;color:var(--ink-soft);text-align:center">10 лет на рынке · 500+ семей · гарант сделки КЖК</div>';
+    var trustLine = '<div style="margin-top:12px;font-size:12px;color:var(--ink-soft);text-align:center">10 лет на рынке · 2000+ семей · гарант сделки КЖК</div>';
     var roomChips = (z.rooms || []).map(function (r) { return '<span class="chip" style="display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-weight:600;font-size:13px;margin-right:6px">' + r + (/^\d+$/.test(r) ? "-комн." : "") + "</span>"; }).join("");
     var stats = [
       { v: priceLabel(z), l: "Стартовая цена" },
