@@ -267,66 +267,77 @@
   function setFav(a) { try { localStorage.setItem(FAV_KEY, JSON.stringify(a)); } catch (e) {} }
   function toggleFav(id) { var f = getFav(), i = f.indexOf(id); if (i < 0) f.push(id); else f.splice(i, 1); setFav(f); return i < 0; }
 
+  function roomLabel(r) {
+    if (r === "Студия") return "Студии";
+    if (r === "Таунхаус") return "Таунхаусы";
+    if (r === "Коттедж") return "Коттеджи";
+    if (/^\d+$/.test(r)) return r + "-комнатные";
+    return r;
+  }
+  var ROOM_ORDER = ["Студия", "1", "2", "3", "4", "Таунхаус", "Коттедж"];
+
   function flatCard(f) {
-    var fav = getFav().indexOf(f.id) >= 0;
-    var rl = /^\d+$/.test(f.rooms) ? f.rooms + "-комн." : f.rooms;
-    var img = f.image ? '<img src="' + f.image + '" alt="' + rl + " " + f.area + ' м² в ЖК ' + f.zkName + '" loading="lazy">' : "";
-    return '<article class="flat" data-id="' + f.id + '">' +
-      '<div class="flat-photo">' + img +
-        '<button class="flat-fav' + (fav ? " is-on" : "") + '" type="button" aria-label="В избранное" data-fav="' + f.id + '">' +
-          '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="' + (fav ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="1.6"><path d="M10 17s-6-3.5-6-8a3.5 3.5 0 0 1 6-2.5A3.5 3.5 0 0 1 16 9c0 4.5-6 8-6 8z"/></svg>' +
-        "</button>" +
-        '<span class="flat-status">' + f.status + "</span>" +
-      "</div>" +
+    var rl = roomLabel(f.rooms);
+    var area = f.areaMin === f.areaMax ? f.areaMin + " м²" : f.areaMin + "–" + f.areaMax + " м²";
+    var img = f.image ? '<img src="' + f.image + '" alt="' + rl + ' в ЖК ' + f.zkName + '" loading="lazy">' : "";
+    var srok = f.srok ? '<span class="flat-status">' + f.srok + "</span>" : "";
+    var waText = "Здравствуйте! Интересует ЖК " + f.zkName + ", " + rl.toLowerCase() + " (от " + money(f.priceFrom) + " ₸). Пришлите варианты и расчёт платежа.";
+    return '<article class="flat" data-zk="' + f.zk + '">' +
+      '<a class="flat-photo" href="' + rel("zk/" + f.zk + ".html") + '">' + img + srok + "</a>" +
       '<div class="flat-body">' +
-        '<div class="flat-head"><span class="flat-rooms">' + rl + '</span><span class="flat-area">' + f.area + ' м²</span></div>' +
-        '<div class="flat-price"><strong>' + money(f.price) + ' ₸</strong><span>' + money(f.pricePerM2) + " ₸/м²</span></div>" +
-        '<div class="flat-meta"><span>' + f.floor + "/" + f.floorsTotal + " этаж</span><span>·</span><span>ЖК " + f.zkName + "</span></div>" +
-        '<div class="flat-actions"><a class="btn btn-brand btn-sm" href="' + rel("zk/" + f.zk + ".html") + '#zk-form">Забронировать</a>' +
-          '<button class="btn btn-outline btn-sm" type="button" data-mortgage="' + f.price + '">Ипотека</button></div>' +
+        '<div class="flat-head"><span class="flat-rooms">' + rl + '</span><span class="flat-area">' + area + "</span></div>" +
+        '<div class="flat-price"><strong>от ' + money(f.priceFrom) + ' ₸</strong><span>платёж от ' + money(f.payFrom) + " ₸/мес</span></div>" +
+        '<div class="flat-meta"><span>ЖК ' + f.zkName + '</span><span>·</span><span>' + f.segment + "</span></div>" +
+        '<div class="flat-actions">' +
+          '<a class="btn btn-brand btn-sm" href="' + rel("zk/" + f.zk + ".html") + '#zk-form">Записаться на показ</a>' +
+          '<a class="btn btn-outline btn-sm" href="https://wa.me/' + WA_PHONE + "?text=" + encodeURIComponent(waText) + '" target="_blank" rel="noopener" data-wa="catalog">Расчёт в WhatsApp</a>' +
+        "</div>" +
       "</div></article>";
   }
 
   function renderCatalog() {
     var root = byId("catalog"); if (!root || !window.ATAMURA_FLATS) return;
     var ALL = window.ATAMURA_FLATS.slice();
-    var prices = ALL.map(function (f) { return f.price; });
+    var prices = ALL.map(function (f) { return f.priceFrom; });
     var PMIN = Math.min.apply(null, prices), PMAX = Math.max.apply(null, prices);
-    var state = { rooms: [], zk: "", pmax: PMAX, sort: "price-asc", fav: false };
+    var state = { rooms: [], zk: "", pmax: PMAX, deal: "", srok: "", sort: "price-asc" };
 
     var q = new URLSearchParams(location.search);
     if (q.get("rooms")) state.rooms = q.get("rooms").split(",").filter(Boolean);
     if (q.get("zk")) state.zk = q.get("zk");
     if (q.get("pmax")) state.pmax = +q.get("pmax") || PMAX;
+    if (q.get("deal")) state.deal = q.get("deal");
+    if (q.get("srok")) state.srok = q.get("srok");
     if (q.get("sort")) state.sort = q.get("sort");
-    if (q.get("fav")) state.fav = q.get("fav") === "1";
 
-    var ROOM_OPTS = ["Студия", "1", "2", "3", "4"].filter(function (r) { return ALL.some(function (f) { return f.rooms === r; }); });
+    var ROOM_OPTS = ROOM_ORDER.filter(function (r) { return ALL.some(function (f) { return f.rooms === r; }); });
     var ZK_OPTS = []; ALL.forEach(function (f) { if (!ZK_OPTS.some(function (z) { return z.slug === f.zk; })) ZK_OPTS.push({ slug: f.zk, name: f.zkName }); });
+    var SROK_OPTS = []; ALL.forEach(function (f) { if (f.srok && SROK_OPTS.indexOf(f.srok) < 0) SROK_OPTS.push(f.srok); });
 
     root.innerHTML =
       '<div class="cat-bar">' +
-        '<div class="cat-chips" id="cat-rooms">' +
+        '<div class="cat-field cat-field-rooms"><label>Комнатность</label><div class="cat-chips" id="cat-rooms">' +
           ROOM_OPTS.map(function (r) { return '<button class="cat-chip" type="button" data-room="' + r + '">' + r + "</button>"; }).join("") +
-        "</div>" +
-        '<div class="cat-field"><label>Жилой комплекс</label><select id="cat-zk"><option value="">Все 8 ЖК</option>' +
+        "</div></div>" +
+        '<div class="cat-field"><label>Жилой комплекс</label><select id="cat-zk"><option value="">Все ЖК</option>' +
           ZK_OPTS.map(function (z) { return '<option value="' + z.slug + '">ЖК ' + z.name + "</option>"; }).join("") + "</select></div>" +
-        '<div class="cat-field"><label>Цена до</label><input type="range" id="cat-pmax" min="' + PMIN + '" max="' + PMAX + '" step="500000" value="' + state.pmax + '"><output id="cat-pmax-v"></output></div>' +
-        '<div class="cat-field"><label>Сортировка</label><select id="cat-sort">' +
-          '<option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option>' +
-          '<option value="area-asc">Площадь ↑</option><option value="area-desc">Площадь ↓</option></select></div>' +
+        '<div class="cat-field"><label>Способ покупки</label><select id="cat-deal"><option value="">Любой</option><option value="Ипотека">Ипотека</option><option value="Рассрочка">Рассрочка</option><option value="7-20-25">7-20-25</option></select></div>' +
+        '<div class="cat-field"><label>Срок сдачи</label><select id="cat-srok"><option value="">Любой</option>' +
+          SROK_OPTS.map(function (s) { return '<option value="' + s + '">' + s + "</option>"; }).join("") + "</select></div>" +
+        '<div class="cat-field cat-field-wide"><label>Бюджет до <output id="cat-pmax-v"></output></label><input type="range" id="cat-pmax" min="' + PMIN + '" max="' + PMAX + '" step="500000" value="' + state.pmax + '"></div>' +
+        '<div class="cat-field"><label>Сортировка</label><select id="cat-sort"><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="area-desc">Больше площадь</option></select></div>' +
         '<button class="cat-reset" type="button" id="cat-reset">Сбросить</button>' +
       "</div>" +
       '<div class="cat-head"><h2 class="cat-count" id="cat-count" aria-live="polite"></h2>' +
-        '<label class="cat-favtoggle"><input type="checkbox" id="cat-fav"> Только избранное</label></div>' +
+        '<p class="cat-note">Цена — «от». Точную стоимость и подходящие квартиры подберёт менеджер.</p></div>' +
       '<div class="cat-grid" id="cat-grid"></div>' +
-      '<div class="cat-empty" id="cat-empty" hidden>Под эти параметры пока нет квартир. <button class="btn btn-outline btn-sm" type="button" id="cat-empty-reset">Сбросить фильтр</button></div>';
+      '<div class="cat-empty" id="cat-empty" hidden>Под эти параметры вариантов нет. <button class="btn btn-outline btn-sm" type="button" id="cat-empty-reset">Сбросить фильтр</button></div>';
 
     var grid = byId("cat-grid"), count = byId("cat-count"), empty = byId("cat-empty");
-    var pmaxR = byId("cat-pmax"), pmaxV = byId("cat-pmax-v"), zkS = byId("cat-zk"), sortS = byId("cat-sort"), favC = byId("cat-fav");
+    var pmaxR = byId("cat-pmax"), pmaxV = byId("cat-pmax-v"), zkS = byId("cat-zk"), dealS = byId("cat-deal"), srokS = byId("cat-srok"), sortS = byId("cat-sort");
 
     function syncControls() {
-      zkS.value = state.zk; sortS.value = state.sort; pmaxR.value = state.pmax; favC.checked = state.fav;
+      zkS.value = state.zk; dealS.value = state.deal; srokS.value = state.srok; sortS.value = state.sort; pmaxR.value = state.pmax;
       pmaxV.textContent = money(state.pmax) + " ₸";
       byId("cat-rooms").querySelectorAll(".cat-chip").forEach(function (b) { b.classList.toggle("is-on", state.rooms.indexOf(b.getAttribute("data-room")) >= 0); });
     }
@@ -334,28 +345,27 @@
       var p = new URLSearchParams();
       if (state.rooms.length) p.set("rooms", state.rooms.join(","));
       if (state.zk) p.set("zk", state.zk);
+      if (state.deal) p.set("deal", state.deal);
+      if (state.srok) p.set("srok", state.srok);
       if (state.pmax < PMAX) p.set("pmax", state.pmax);
       if (state.sort !== "price-asc") p.set("sort", state.sort);
-      if (state.fav) p.set("fav", "1");
       history.replaceState(null, "", location.pathname + (p.toString() ? "?" + p.toString() : ""));
     }
     function apply() {
-      var fav = getFav();
       var list = ALL.filter(function (f) {
         if (state.rooms.length && state.rooms.indexOf(f.rooms) < 0) return false;
         if (state.zk && f.zk !== state.zk) return false;
-        if (f.price > state.pmax) return false;
-        if (state.fav && fav.indexOf(f.id) < 0) return false;
+        if (state.deal && (f.deal || []).indexOf(state.deal) < 0) return false;
+        if (state.srok && f.srok !== state.srok) return false;
+        if (f.priceFrom > state.pmax) return false;
         return true;
       });
       list.sort(function (a, b) {
-        if (state.sort === "price-asc") return a.price - b.price;
-        if (state.sort === "price-desc") return b.price - a.price;
-        if (state.sort === "area-asc") return a.area - b.area;
-        if (state.sort === "area-desc") return b.area - a.area;
-        return 0;
+        if (state.sort === "price-desc") return b.priceFrom - a.priceFrom;
+        if (state.sort === "area-desc") return b.areaMax - a.areaMax;
+        return a.priceFrom - b.priceFrom;
       });
-      count.textContent = list.length + " " + plural(list.length, "квартира", "квартиры", "квартир");
+      count.textContent = list.length + " " + plural(list.length, "вариант", "варианта", "вариантов");
       grid.innerHTML = list.map(flatCard).join("");
       empty.hidden = list.length > 0;
       grid.hidden = list.length === 0;
@@ -370,17 +380,12 @@
     });
     pmaxR.addEventListener("input", function () { state.pmax = +pmaxR.value; pmaxV.textContent = money(state.pmax) + " ₸"; apply(); });
     zkS.addEventListener("change", function () { state.zk = zkS.value; apply(); });
+    dealS.addEventListener("change", function () { state.deal = dealS.value; apply(); });
+    srokS.addEventListener("change", function () { state.srok = srokS.value; apply(); });
     sortS.addEventListener("change", function () { state.sort = sortS.value; apply(); });
-    favC.addEventListener("change", function () { state.fav = favC.checked; apply(); });
-    byId("cat-reset").addEventListener("click", function () { state = { rooms: [], zk: "", pmax: PMAX, sort: "price-asc", fav: false }; syncControls(); apply(); });
-
-    grid.addEventListener("click", function (e) {
-      var fb = e.target.closest("[data-fav]");
-      if (fb) { var on = toggleFav(fb.getAttribute("data-fav")); fb.classList.toggle("is-on", on); fb.querySelector("svg").setAttribute("fill", on ? "currentColor" : "none"); if (state.fav) apply(); return; }
-      var mb = e.target.closest("[data-mortgage]");
-      if (mb) { var price = +mb.getAttribute("data-mortgage"); var c = byId("cost"); if (c) { c.value = Math.min(Math.max(price, +c.min), +c.max); c.dispatchEvent(new Event("input")); var calc = byId("mortgage"); if (calc) calc.scrollIntoView({ behavior: "smooth" }); } }
-    });
+    byId("cat-reset").addEventListener("click", function () { state = { rooms: [], zk: "", pmax: PMAX, deal: "", srok: "", sort: "price-asc" }; syncControls(); apply(); });
     byId("cat-empty-reset").addEventListener("click", function () { byId("cat-reset").click(); });
+    grid.addEventListener("click", function (e) { if (e.target.closest("[data-wa]")) track("whatsapp_click", { source: "catalog" }); });
 
     syncControls(); apply();
   }

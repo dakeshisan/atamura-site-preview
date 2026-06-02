@@ -875,3 +875,17 @@
   .head.over.is-stuck .phone-block strong a, .head.over.is-stuck .lang-switch, .head.over.is-stuck .icon-btn, .head.over.is-stuck .burger { color: var(--ink); }
   .head.over.is-stuck .phone-block small { color: var(--ink-mute); }
   .head.over.is-stuck .login-btn { color: var(--ink); border-color: var(--line); }
+
+  /* Каталог-конвертер (type-level): фильтр-бар на flex, переносится; без избранного */
+  .cat-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--s-4); }
+  .cat-bar .cat-field { flex: 0 0 auto; }
+  .cat-field-rooms { flex: 0 0 auto; }
+  .cat-field-wide { flex: 1 1 220px; min-width: 200px; }
+  .cat-field-wide label { display: flex; gap: 8px; align-items: baseline; }
+  .cat-note { font-size: 13px; line-height: 1.4; color: var(--ink-soft); margin: 0; max-width: 56ch; }
+  a.flat-photo { display: block; color: inherit; }
+  .flat-status { background: oklch(28% 0.02 250 / 0.82); }
+  @media (max-width: 560px) {
+    .cat-bar { flex-direction: column; align-items: stretch; }
+    .cat-bar .cat-field, .cat-field-wide, .cat-field-rooms { flex: 1 1 auto; width: 100%; }
+  }
