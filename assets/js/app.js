@@ -170,8 +170,9 @@
         if (tel && !phoneValid(tel.value)) { showFieldError(tel, "Введите номер: +7 7XX XXX-XX-XX"); tel.focus(); return; }
         var data = {}; new FormData(f).forEach(function (v, k) { data[k] = v; });
         data.source = f.getAttribute("data-form") || "form"; data.page = location.pathname;
+        data.ref = document.referrer || "прямой заход"; data.utm = location.search || ""; data.ts = new Date().toISOString();
         try { var q = JSON.parse(localStorage.getItem("atamura_leads") || "[]"); q.push(data); localStorage.setItem("atamura_leads", JSON.stringify(q)); } catch (e2) {}
-        track("form_submitted", { form_type: data.source, page: data.page });
+        track("form_submitted", { form_type: data.source, page: data.page, messenger: data.messenger || "" });
         location.href = rel("spasibo.html");
       });
     });
