@@ -757,6 +757,23 @@
   .flat-price span { font-size: 12px; color: var(--ink-mute); margin-left: 8px; }
   .flat-meta { font-size: 12px; color: var(--ink-mute); display: flex; gap: 6px; flex-wrap: wrap; }
   .flat-actions { margin-top: auto; padding-top: var(--s-3); display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+
+  /* ---------- Избранное (localStorage) ---------- */
+  .flat { position: relative; }
+  .flat-fav { position: absolute; top: 10px; right: 10px; z-index: 3; width: 38px; height: 38px; border: 0; border-radius: 50%; background: oklch(20% 0 0 / 0.42); backdrop-filter: blur(6px); display: grid; place-items: center; cursor: pointer; transition: 160ms cubic-bezier(.2,.9,.25,1); }
+  .flat-fav:hover { background: oklch(20% 0 0 / 0.62); transform: scale(1.08); }
+  .flat-fav svg { fill: none; stroke: #fff; stroke-width: 2; }
+  .flat-fav.is-on { background: #fff; }
+  .flat-fav.is-on svg { fill: #e0245e; stroke: #e0245e; }
+  .cat-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-4); flex-wrap: wrap; }
+  .cat-fav-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--bg); font: 600 13px/1 inherit; color: var(--ink); cursor: pointer; transition: 140ms; flex-shrink: 0; }
+  .cat-fav-toggle svg { fill: none; stroke: currentColor; stroke-width: 2; }
+  .cat-fav-toggle:hover { border-color: var(--ink-mute); }
+  .cat-fav-toggle.is-on { background: var(--brand); color: var(--brand-on); border-color: var(--brand); }
+  .cat-fav-toggle.is-on svg { fill: currentColor; }
+  a.icon-btn { position: relative; }
+  .fav-count { position: absolute; top: -3px; right: -3px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--brand); color: #fff; font: 700 10px/16px inherit; text-align: center; pointer-events: none; }
+  .fav-count:empty { display: none; }
   .btn-sm { min-height: 40px; padding: 0 16px; font-size: 13px; }
   .cat-empty { text-align: center; padding: var(--s-9) 0; color: var(--ink-soft); display: flex; flex-direction: column; align-items: center; gap: var(--s-4); }
 
