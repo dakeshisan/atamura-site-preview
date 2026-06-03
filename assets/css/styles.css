@@ -173,7 +173,7 @@
 
   /* nav */
   .nav-main { display: flex; gap: var(--s-4); align-items: center; font-size: 14px; font-weight: 500; }
-  .nav-main a { color: var(--ink); padding-block: var(--s-2); transition: color 120ms; }
+  .nav-main a { color: var(--ink); padding-block: var(--s-2); transition: color 120ms; white-space: nowrap; }
   .nav-main a:hover { color: var(--brand-deep); }
   .nav-main .nav-consult {
     color: var(--brand-deep); font-weight: 600;
