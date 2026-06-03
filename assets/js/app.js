@@ -81,6 +81,11 @@
       if (downLabel) downLabel.textContent = money(D) + " ₸ (" + dPct + "%)";
       if (yearsLabel) yearsLabel.textContent = Y + " лет";
       if (result) result.innerHTML = money(monthly) + "<sub>₸/мес</sub>";
+      var wa = byId("mortWa");
+      if (wa) {
+        var msg = "Здравствуйте! Рассчитал на сайте ATAMURA: квартира ~" + money(C) + " ₸, первый взнос " + dPct + "% (" + money(D) + " ₸), срок " + Y + " лет → платёж ~" + money(monthly) + " ₸/мес. Подберите варианты под этот бюджет и помогите с точным расчётом.";
+        wa.href = "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(msg);
+      }
     }
     var calcTracked = false;
     [cost, down, years].forEach(function (el) {
@@ -304,7 +309,7 @@
       '<a class="flat-photo" href="' + rel("zk/" + f.zk + ".html") + '">' + img + srok + "</a>" +
       '<div class="flat-body">' +
         '<div class="flat-head"><span class="flat-rooms">' + rl + '</span><span class="flat-area">' + area + "</span></div>" +
-        '<div class="flat-price"><strong>от ' + money(f.priceFrom) + ' ₸</strong><span>платёж от ' + money(f.payFrom) + " ₸/мес</span></div>" +
+        '<div class="flat-price"><strong>от ' + money(f.priceFrom) + ' ₸</strong><span>взнос 20% → от ' + money(f.payFrom) + " ₸/мес · 7-20-25</span></div>" +
         '<div class="flat-meta"><span>ЖК ' + f.zkName + '</span><span>·</span><span>' + f.segment + "</span></div>" +
         '<div class="flat-actions">' +
           '<a class="btn btn-brand btn-sm" href="' + rel("zk/" + f.zk + ".html") + '#zk-form">Записаться на показ</a>' +
