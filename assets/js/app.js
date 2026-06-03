@@ -7,6 +7,7 @@
 
   var IN_ZK = /\/zk\//.test(location.pathname);
   function rel(p) { return (IN_ZK ? "../" : "") + p; }
+  function imgsrc(p) { return p && !/^(https?:)?\/\//.test(p) && p.charAt(0) !== "/" ? rel(p) : p; }
   function money(n) { return Math.round(n).toLocaleString("ru-RU").replace(/,/g, " "); }
   function byId(id) { return document.getElementById(id); }
   function priceLabel(z) {
@@ -173,7 +174,7 @@
 
   /* ---------- Карточка ЖК (.pcard) ---------- */
   function pcard(z) {
-    var photo = z.hero_image || (z.gallery && z.gallery[0]) || "";
+    var photo = imgsrc(z.hero_image || (z.gallery && z.gallery[0]) || "");
     var badge2 = z.draft ? '<span class="badge is-status is-light">Скоро</span>' : '<span class="badge is-soft">Идут продажи</span>';
     var price = z.priceFrom ? 'от <strong>' + (z.priceFrom / 1000000).toFixed(z.priceFrom % 1000000 ? 1 : 0) + "</strong> млн ₸"
       : (z.priceText ? "<strong>" + z.priceText + "</strong>" : "<strong>цена по запросу</strong>");
@@ -194,7 +195,7 @@
     document.title = "ЖК " + z.name + " — ATAMURA GROUP";
 
     var gal = []; if (z.hero_image) gal.push(z.hero_image); (z.gallery || []).forEach(function (g) { if (gal.indexOf(g) < 0) gal.push(g); });
-    var heroImg = gal[0] || "";
+    var heroImg = imgsrc(gal[0] || "");
     var galTiles = gal.slice(1, 6); while (galTiles.length < 4) galTiles.push(null);
 
     var feat = (z.highlights || []).map(function (h) {
@@ -236,7 +237,7 @@
         '<div class="zk-stats">' + stats + "</div>" +
         '<div class="zk-layout">' +
           '<div class="zk-main">' +
-            '<div class="zk-gallery">' + galTiles.map(function (u) { return u ? '<div class="zk-gtile"><img src="' + u + '" alt="ЖК ' + z.name + '" loading="lazy"></div>' : '<div class="zk-gtile is-ph"></div>'; }).join("") + "</div>" +
+            '<div class="zk-gallery">' + galTiles.map(function (u) { return u ? '<div class="zk-gtile"><img src="' + imgsrc(u) + '" alt="ЖК ' + z.name + '" loading="lazy"></div>' : '<div class="zk-gtile is-ph"></div>'; }).join("") + "</div>" +
             '<h2 class="zk-h2">О комплексе</h2><p class="zk-lead">' + (z.description || "") + "</p>" +
             '<div style="margin-top:var(--s-4)">' + roomChips + "</div>" +
             (z.draft ? '<div class="note">Сайт этого комплекса сейчас не опубликован — показано предварительное описание. Заменим реальными данными и фото, как только сайт станет доступен.</div>' : "") +

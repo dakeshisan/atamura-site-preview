@@ -30,7 +30,7 @@ window.ATAMURA_ZHK = [
     ],
     "address": "",
     "statusDetail": "",
-    "hero_image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1400&q=80",
+    "hero_image": "assets/img/zhk/atmosfera.jpg",
     "gallery": [
       "https://static.tildacdn.pro/tild3163-3564-4163-b862-303262386631/8228.jpg",
       "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1400&q=80",
@@ -148,13 +148,12 @@ window.ATAMURA_ZHK = [
     ],
     "address": "Офис продаж: г. Алматы, ул. Толе би, 12 (вход с улицы Толе би). Сам ЖК — вдоль Кульджинского тракта, в предгорьях Заилийского Алатау (по заданию: с. Туздыбастау)",
     "statusDetail": "строится (на территории «будет расположен» ТРЦ KERUEN; копирайт ©KERUEN 2024-2025; продажи открыты)",
-    "hero_image": "https://static.tildacdn.pro/tild6563-3766-4836-a662-636634613066/1.png",
+    "hero_image": "assets/img/zhk/keruen.jpg",
     "gallery": [
-      "https://static.tildacdn.pro/tild6662-6130-4161-a332-393036383035/1.png",
-      "https://static.tildacdn.pro/tild3833-3635-4038-b331-346132346161/1.png",
-      "https://static.tildacdn.pro/tild3939-3761-4666-a239-646366333532/2.png",
-      "https://static.tildacdn.pro/tild6365-3630-4234-b566-613630363036/2.png",
-      "https://static.tildacdn.pro/tild3462-3031-4839-b638-626631316438/2.png"
+      "assets/img/zhk/keruen-01.jpg",
+      "assets/img/zhk/keruen-02.jpg",
+      "assets/img/zhk/keruen-03.jpg",
+      "assets/img/zhk/keruen-04.jpg"
     ],
     "realPhotos": 14,
     "site": "https://keruen.atamuragroup.kz",
@@ -185,7 +184,7 @@ window.ATAMURA_ZHK = [
     ],
     "address": "Офис продаж: г. Алматы, ул. Толе би, 12. Комплекс: предгорья Алматы у с. Кыргауылды (верхняя Каскеленская трасса), Карасайский р-н",
     "statusDetail": "строится очередями: 1 оч. — II кв. 2026, 2 оч. — IV кв. 2026, 3 оч. — II кв. 2027, 4 оч. — IV кв. 2027",
-    "hero_image": "https://static.tildacdn.pro/tild6161-6235-4763-b239-313662393536/photo_2025-12-25_102.jpeg",
+    "hero_image": "assets/img/zhk/aqsai.jpg",
     "gallery": [
       "https://static.tildacdn.pro/tild3562-3664-4165-b134-303837633162/photo_2025-12-25_102.jpeg",
       "https://static.tildacdn.pro/tild3663-3039-4533-b065-366161653737/photo_2025-12-25_102.jpeg",
@@ -224,7 +223,7 @@ window.ATAMURA_ZHK = [
     ],
     "address": "г. Алматы, улица Жансугурова, 109д (район Жана Куат)",
     "statusDetail": "",
-    "hero_image": "https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=1400&q=80",
+    "hero_image": "assets/img/zhk/bravo.jpg",
     "gallery": [
       "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?auto=format&fit=crop&w=1400&q=80",
       "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1400&q=80",
