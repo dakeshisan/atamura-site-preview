@@ -803,10 +803,16 @@
   /* ============ TRUST COUNTERS ============ */
   .trust { padding-block: var(--s-9); }
   .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); }
-  .trust-cell { text-align: center; padding: var(--s-5); }
+  .trust-cell { text-align: center; padding: var(--s-5); position: relative; }
   .trust-cell b { display: block; font-size: clamp(32px, 4vw, 52px); font-weight: 700; color: var(--brand); letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
   .trust-cell span { display: block; margin-top: var(--s-3); font-size: 14px; color: var(--ink-soft); }
-  @media (max-width: 760px) { .trust-grid { grid-template-columns: 1fr 1fr; gap: var(--s-5); } }
+  /* тонкий вертикальный разделитель между счётчиками — ровный визуальный ритм */
+  .trust-cell + .trust-cell::before { content: ""; position: absolute; top: 50%; left: calc(var(--s-4) / -2); transform: translateY(-50%); width: 1px; height: 56%; background: var(--line); }
+  @media (max-width: 760px) {
+    .trust-grid { grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+    .trust-cell + .trust-cell::before { left: calc(var(--s-5) / -2); }
+    .trust-cell:nth-child(odd)::before { display: none; }
+  }
 
   /* ============ WAYS TO BUY ============ */
   .buy { padding-block: var(--s-9); }
