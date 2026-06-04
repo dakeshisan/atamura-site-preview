@@ -156,8 +156,11 @@
   /* ---------- Карточка ЖК (.pcard) ---------- */
   function pcard(z) {
     var photo = imgsrc(z.hero_image || (z.gallery && z.gallery[0]) || "");
-    var badge2 = z.draft ? '<span class="badge is-status is-light">Скоро</span>' : '<span class="badge is-soft">Идут продажи</span>';
-    var price = z.priceFrom ? 'от <strong>' + (z.priceFrom / 1000000).toFixed(z.priceFrom % 1000000 ? 1 : 0) + "</strong> млн ₸"
+    var badge2 = z.status === "Скоро" ? '<span class="badge is-status is-light">Скоро</span>'
+      : z.status === "Сдан" ? '<span class="badge is-status">Сдан</span>'
+      : '<span class="badge is-soft">Идут продажи</span>';
+    var price = z.status === "Сдан" ? "<strong>Продажи завершены</strong>"
+      : z.priceFrom ? 'от <strong>' + (z.priceFrom / 1000000).toFixed(z.priceFrom % 1000000 ? 1 : 0).replace(".", ",") + "</strong> млн ₸"
       : (z.priceText ? "<strong>" + z.priceText + "</strong>" : "<strong>цена по запросу</strong>");
     return '<a class="pcard" href="' + rel("zk/" + z.slug + ".html") + '">' +
       '<div class="pcard-photo">' + (photo ? '<img src="' + photo + '" alt="ЖК ' + z.name + '" loading="lazy" />' : "") +
