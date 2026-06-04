@@ -10,6 +10,7 @@
     --line-soft: #ECEAE2;
     --black:     #1E1E1E;
     --navy:      #284157;                  /* brandbook dark navy — было НЕ определено → выбранные чипы становились невидимыми */
+    --teal:      #007484;                  /* = brand teal — тоже было НЕ определено (цвет «Консультация» при скролле) */
     --grey:      #BCBCBC;                  /* brandbook grey */
     --green:     oklch(62% 0.16 145);
     --tg:        oklch(62% 0.13 230);
