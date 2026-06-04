@@ -230,10 +230,10 @@
     var others = window.ATAMURA_ZHK.filter(function (x) { return x.slug !== slug; }).slice(0, 3).map(pcard).join("");
 
     host.innerHTML =
-      '<section class="pagehero" style="' + (heroImg ? "background-image:linear-gradient(180deg, oklch(0% 0 0 /.18) 0%, oklch(0% 0 0 /.62) 100%), url(" + heroImg + ")" : "") + '">' +
+      '<section class="pagehero" style="' + (heroImg ? "background-image:linear-gradient(180deg, oklch(0% 0 0 /.18) 0%, oklch(0% 0 0 /.62) 100%), url(" + heroImg + ")" : "background-color:var(--dark-cta)") + '">' +
         '<div class="wrap pagehero-inner">' +
           '<nav class="crumbs"><a href="' + rel("index.html") + '">Главная</a><span>›</span><a href="' + rel("index.html") + '#projects">Жилые комплексы</a><span>›</span>ЖК ' + z.name + "</nav>" +
-          '<div class="pagehero-badges"><span class="badge is-light">' + z.segment + "</span>" + (z.status ? '<span class="badge is-accent">' + z.status + "</span>" : "") + "</div>" +
+          '<div class="pagehero-badges">' + (z.segment ? '<span class="badge is-light">' + z.segment + "</span>" : "") + (z.status ? '<span class="badge is-accent">' + z.status + "</span>" : "") + "</div>" +
           '<h1 class="pagehero-title">ЖК ' + z.name + "</h1>" +
           '<p class="pagehero-sub">' + (z.tagline || "") + " · " + z.district + "</p>" +
           '<div class="pagehero-cta"><a class="btn btn-accent" href="#zk-form">Узнать цены и планировки</a>' +
@@ -292,11 +292,12 @@
   function roomLabel(r) {
     if (r === "Студия") return "Студии";
     if (r === "Таунхаус") return "Таунхаусы";
+    if (r === "Дуплекс") return "Дуплексы";
     if (r === "Коттедж") return "Коттеджи";
     if (/^\d+$/.test(r)) return r + "-комнатные";
     return r;
   }
-  var ROOM_ORDER = ["Студия", "1", "2", "3", "4", "Таунхаус", "Коттедж"];
+  var ROOM_ORDER = ["Студия", "1", "2", "3", "4", "Дуплекс", "Таунхаус", "Коттедж"];
 
   function flatCard(f) {
     var rl = roomLabel(f.rooms);
