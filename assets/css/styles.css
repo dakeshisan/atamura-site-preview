@@ -9,6 +9,7 @@
     --line:      #E0DDD3;
     --line-soft: #ECEAE2;
     --black:     #1E1E1E;
+    --navy:      #284157;                  /* brandbook dark navy — было НЕ определено → выбранные чипы становились невидимыми */
     --grey:      #BCBCBC;                  /* brandbook grey */
     --green:     oklch(62% 0.16 145);
     --tg:        oklch(62% 0.13 230);
