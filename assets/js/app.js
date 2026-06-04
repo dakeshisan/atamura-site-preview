@@ -560,6 +560,32 @@
     build();
   }
 
+  /* ---------- Тост (короткое ненавязчивое уведомление) ---------- */
+  var _toastTimer = null;
+  function toast(msg) {
+    var t = byId("app-toast");
+    if (!t) { t = document.createElement("div"); t.id = "app-toast"; t.className = "toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+    t.textContent = msg;
+    requestAnimationFrame(function () { t.classList.add("is-on"); });
+    if (_toastTimer) clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(function () { t.classList.remove("is-on"); }, 3200);
+  }
+
+  /* ---------- Переключатель языка Рус / Qaz ----------
+     Казахской версии пока нет — честно сообщаем «скоро», не подменяя контент. */
+  function bindLang() {
+    var sw = document.querySelector(".lang-switch");
+    if (!sw) return;
+    sw.addEventListener("click", function (e) {
+      var b = e.target.closest(".lang-opt");
+      if (!b) return;
+      if (b.getAttribute("data-lang") === "kk") {
+        toast("Қазақ нұсқасы — жақында. Версия на казахском скоро.");
+        track("lang_kk_click", {});
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     renderZhkDetail();
     renderCatalog();
@@ -571,6 +597,7 @@
     bindStickyHeader();
     bindActiveNav();
     bindFavCount();
+    bindLang();
     /* Делегированный трекинг исходящих контактов (без PII) */
     document.addEventListener("click", function (e) {
       var t = e.target;

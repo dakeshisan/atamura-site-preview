@@ -186,7 +186,13 @@
     background: currentColor; mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'><path fill='black' d='M2 0a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2v2l3-2h5a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z'/></svg>") center/contain no-repeat;
   }
   .head-utils { display: flex; align-items: center; gap: var(--s-4); }
-  .lang-switch { font-size: 14px; font-weight: 600; color: var(--ink); display: inline-flex; align-items: center; gap: 4px; cursor: pointer; background: transparent; border: 0; }
+  .lang-switch { display: inline-flex; align-items: center; gap: 2px; padding: 2px; border-radius: 999px; border: 1px solid color-mix(in srgb, currentColor 30%, transparent); background: transparent; }
+  .lang-opt { font: 600 12.5px/1 inherit; color: inherit; background: transparent; border: 0; cursor: pointer; padding: 5px 10px; border-radius: 999px; letter-spacing: 0.01em; transition: background 0.15s, color 0.15s, opacity 0.15s; }
+  .lang-opt[aria-pressed="true"] { background: var(--brand); color: #fff; }
+  .lang-opt:not([aria-pressed="true"]) { opacity: 0.62; }
+  .lang-opt:not([aria-pressed="true"]):hover { opacity: 1; }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 14px); background: var(--dark-cta); color: #fff; font-size: 14px; font-weight: 500; line-height: 1.4; padding: 12px 18px; border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,0.22); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; max-width: min(92vw, 440px); text-align: center; }
+  .toast.is-on { opacity: 1; transform: translate(-50%, 0); }
   .phone-block { text-align: right; line-height: 1.2; }
   .phone-block strong { font-size: 16px; font-weight: 700; white-space: nowrap; }
   .phone-block small { font-size: 11px; color: var(--ink-mute); display: block; margin-top: 2px; }
