@@ -452,6 +452,14 @@
   .mort-result-label { font-size: 13px; color: var(--ink-soft); }
   .mort-result-value { font-size: 28px; font-weight: 700; color: var(--brand-deep); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
   .mort-result-value sub { font-size: 12px; font-weight: 500; color: var(--ink-mute); margin-left: 4px; }
+  /* Калькулятор «Наурыз» — двухэтапный вывод */
+  .nz-phases { display: grid; gap: 10px; }
+  .nz-phase { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-3); padding: 12px 14px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); }
+  .nz-phase > span { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .nz-phase > span small { display: block; font-size: 11px; font-weight: 500; color: var(--ink-mute); margin-top: 2px; }
+  .nz-phase strong { font-size: 20px; font-weight: 700; color: var(--brand-deep); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; white-space: nowrap; }
+  .nz-phase strong sub { font-size: 11px; font-weight: 500; color: var(--ink-mute); margin-left: 3px; }
+  .nz-warn { font-size: 12px; line-height: 1.4; color: #b4232a; margin: 0; }
 
   /* ============ REVIEWS ============ */
   .reviews { padding-block: var(--sect-py); border-top: 1px solid var(--line); }

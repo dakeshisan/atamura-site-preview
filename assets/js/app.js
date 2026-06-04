@@ -603,6 +603,39 @@
     });
   }
 
+  /* ---------- Калькулятор господдержки «Наурыз» (Отбасы): двухэтапная модель ЖСС ----------
+     Перенос выверенной модели из deliverables/nauryz_mortgage_calculator.html, упрощённо:
+     база 7%, Алматы (лимит займа 36 млн), ОП=16 → 2-й этап 5%, сроки 8+11 лет, цель депозита 50%.
+     1-й этап — только проценты + накопление на депозит ЖСС (2% + госпремия 20%, ≤200 МРП). */
+  function bindNauryzCalc() {
+    var price = byId("nzPrice"), dp = byId("nzDp");
+    if (!price || !dp) return;
+    var RATE1 = 7, RATE2 = 5, PH1 = 8, TOTAL = 19, DEP = 0.5, DRATE = 0.02, MRPCAP = 865000, MAXLOAN = 36000000;
+    function annuity(p, rPct, n) { if (n <= 0 || p <= 0) return 0; var i = rPct / 12 / 100; if (i === 0) return p / n; var f = Math.pow(1 + i, n); return p * i * f / (f - 1); }
+    function solveDeposit(target, n) { if (n <= 0 || target <= 0) return 0; var rm = DRATE / 12; function fv(c) { var b = 0; for (var m = 1; m <= n; m++) { b = (b + c) * (1 + rm); if (m % 12 === 0) b += 0.2 * Math.min(c * 12, MRPCAP); } return b; } var lo = 0, hi = target / n * 1.2 + 1; while (fv(hi) < target && hi < target) hi *= 1.5; for (var it = 0; it < 60; it++) { var mid = (lo + hi) / 2; if (fv(mid) < target) lo = mid; else hi = mid; } return (lo + hi) / 2; }
+    var s1 = byId("nzStage1"), s2 = byId("nzStage2"), ov = byId("nzOverpay"), warn = byId("nzWarn"), wa = byId("nzWa"), pL = byId("nzPriceLabel"), dL = byId("nzDpLabel");
+    function calc() {
+      var P = +price.value, dpPct = +dp.value;
+      var down = Math.round(P * dpPct / 100), loan = P - down;
+      if (pL) pL.textContent = money(P) + " ₸";
+      if (dL) dL.textContent = money(down) + " ₸ (" + dpPct + "%)";
+      var over = loan > MAXLOAN;
+      var n1 = PH1 * 12, n2 = (TOTAL - PH1) * 12;
+      var pay1 = loan * RATE1 / 12 / 100;
+      var depM = solveDeposit(loan * DEP, n1);
+      var pay2 = annuity(loan - loan * DEP, RATE2, n2);
+      var overpay = pay1 * n1 + (pay2 * n2 - (loan - loan * DEP));
+      if (s1) s1.innerHTML = money(pay1 + depM) + "<sub>₸/мес</sub>";
+      if (s2) s2.innerHTML = money(pay2) + "<sub>₸/мес</sub>";
+      if (ov) ov.innerHTML = money(overpay) + "<sub>₸</sub>";
+      if (warn) { warn.hidden = !over; if (over) warn.textContent = "Заём " + money(loan) + " ₸ выше лимита «Наурыз» для Алматы (36 млн ₸). Увеличьте первый взнос."; }
+      if (wa) wa.setAttribute("href", "https://wa.me/77007001111?text=" + encodeURIComponent("Здравствуйте! Интересует господдержка «Наурыз». Квартира " + money(P) + " ₸, первый взнос " + dpPct + "% (" + money(down) + " ₸). Подскажите по программе и точному расчёту."));
+    }
+    price.addEventListener("input", calc);
+    dp.addEventListener("input", calc);
+    calc();
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     renderZhkDetail();
     renderCatalog();
@@ -615,6 +648,7 @@
     bindActiveNav();
     bindFavCount();
     bindLang();
+    bindNauryzCalc();
     /* Делегированный трекинг исходящих контактов (без PII) */
     document.addEventListener("click", function (e) {
       var t = e.target;

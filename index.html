@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/styles.css?v=520f30fd" />
+<link rel="stylesheet" href="assets/css/styles.css?v=1413834d" />
 <!-- GA4: вставьте Measurement ID в build_site.mjs (GA4_ID), затем node build_site.mjs. События уже копятся в window.dataLayer. -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ATAMURA GROUP","alternateName":"Atamura Group","url":"https://atamuragroup.kz","logo":"https://atamuragroup.kz/assets/img/logo-navy.png","description":"Застройщик Алматы с 2016 года. 8 жилых комплексов — от доступного жилья до делюкс-таунхаусов.","foundingDate":"2016","areaServed":{"@type":"City","name":"Алматы"},"address":{"@type":"PostalAddress","addressCountry":"KZ","addressLocality":"Алматы","streetAddress":"ул. Толе би, 12"},"telephone":"+7 700 700 11 11","sameAs":["https://instagram.com/atamura.group","https://t.me/atamuragroup"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Какой нужен первоначальный взнос?","acceptedAnswer":{"@type":"Answer","text":"По программе 7-20-25 и рассрочке от застройщика — от 20% стоимости. По отдельным программам банков-партнёров взнос может быть ниже. Точную сумму посчитает калькулятор и подтвердит менеджер."}},{"@type":"Question","name":"Что такое программа 7-20-25?","acceptedAnswer":{"@type":"Answer","text":"Государственная ипотечная программа: ставка 7% годовых, первоначальный взнос 20%, срок до 25 лет. Оформляется через банки-партнёры (Отбасы банк и др.)."}},{"@type":"Question","name":"Можно ли купить в рассрочку?","acceptedAnswer":{"@type":"Answer","text":"Да. Рассрочка от застройщика — 0% до сдачи объекта, первоначальный взнос от 20%. Остаток оплачивается ипотекой или наличными после ввода в эксплуатацию."}},{"@type":"Question","name":"Можно ли использовать пенсионные накопления (ЕНПФ)?","acceptedAnswer":{"@type":"Answer","text":"Да, единовременные пенсионные выплаты можно направить на первоначальный взнос по программе господдержки."}},{"@type":"Question","name":"Какие документы нужны?","acceptedAnswer":{"@type":"Answer","text":"Для брони — удостоверение личности. Для ипотеки дополнительно — подтверждение дохода. Полный список под вашу ситуацию пришлёт менеджер."}},{"@type":"Question","name":"Кто гарант сделки?","acceptedAnswer":{"@type":"Answer","text":"Гарант сделки — Казахстанская Жилищная Компания (КЖК). ATAMURA GROUP на рынке Алматы с 2016 года, 2000+ семей уже живут в наших домах."}}]}</script>
@@ -275,6 +275,45 @@
   </div>
 </section>
 
+<section class="mortgage nauryz" id="nauryz">
+  <div class="wrap mortgage-grid">
+    <div class="mortgage-info">
+      <h2>Господдержка «Наурыз»</h2>
+      <p>Госпрограмма Отбасы банка на первое жильё. Двухэтапная схема жилстройсбережений: сначала — проценты по ставке 7% и накопление на депозит, затем заём на остаток по льготным 3,5–5%.</p>
+      <div class="mort-bullets">
+        <div class="mort-bullet"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3 3 7-7"/></svg>Ставка 1-го этапа — <strong>7%</strong> (очередники/СУСН) или 9% (остальные граждане)</div>
+        <div class="mort-bullet"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3 3 7-7"/></svg>1-й этап до 8 лет — только проценты + взносы на депозит до 50% займа (госпремия 20%)</div>
+        <div class="mort-bullet"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3 3 7-7"/></svg>2-й этап до 11 лет — заём на остаток по ставке 3,5–5%</div>
+        <div class="mort-bullet"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3 3 7-7"/></svg>Лимит займа до 36 млн ₸ (Алматы), первый взнос от 10%</div>
+      </div>
+      <a class="btn btn-brand" href="https://wa.me/77007001111" target="_blank" rel="noopener" data-wa="nauryz-info">Узнать про «Наурыз» в WhatsApp →</a>
+    </div>
+
+    <div class="mort-card">
+      <h3>Калькулятор «Наурыз»</h3>
+      <div class="mort-field">
+        <div class="mort-field-label"><span>Цена квартиры</span><strong id="nzPriceLabel">27 500 000 ₸</strong></div>
+        <input class="slider" type="range" min="13000000" max="45000000" step="500000" value="27500000" id="nzPrice" />
+      </div>
+      <div class="mort-field">
+        <div class="mort-field-label"><span>Первоначальный взнос <abbr class="hint" tabindex="0" title="По «Наурыз» — от 10% (первичка) или 20% (черновая/вторичка). Остаток — двухэтапный заём.">?</abbr></span><strong id="nzDpLabel">5 500 000 ₸ (20%)</strong></div>
+        <input class="slider" type="range" min="10" max="50" step="5" value="20" id="nzDp" />
+      </div>
+      <div class="nz-phases">
+        <div class="nz-phase"><span>1-й этап · 8 лет<small>проценты + депозит</small></span><strong id="nzStage1">—</strong></div>
+        <div class="nz-phase"><span>2-й этап · 11 лет<small>заём на остаток</small></span><strong id="nzStage2">—</strong></div>
+      </div>
+      <div class="mort-result">
+        <span class="mort-result-label">Переплата за весь срок</span>
+        <span class="mort-result-value" id="nzOverpay">—</span>
+      </div>
+      <p class="nz-warn" id="nzWarn" hidden></p>
+      <a class="btn btn-brand mort-cta" id="nzWa" href="https://wa.me/77007001111" target="_blank" rel="noopener" data-wa="nauryz">Рассчитать точно в WhatsApp →</a>
+      <p class="mort-note">Ориентир: база 7%, Алматы, ОП 16 (2-й этап 5%), сроки 8+11 лет, депозит — оценка. Программа меняется — точные условия в Отбасы банке (hcsbk.kz).</p>
+    </div>
+  </div>
+</section>
+
 
 <section class="buy" id="buy"><div class="wrap">
   <div class="sect-head"><h2 class="sect-title">Способы покупки</h2></div>
@@ -510,8 +549,8 @@
 <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*"},"eagerness":"moderate"}]}</script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="assets/js/zhk-data.js?v=520f30fd"></script>
-<script src="assets/js/flats-data.js?v=520f30fd"></script>
-<script src="assets/js/app.js?v=520f30fd"></script>
+<script src="assets/js/zhk-data.js?v=1413834d"></script>
+<script src="assets/js/flats-data.js?v=1413834d"></script>
+<script src="assets/js/app.js?v=1413834d"></script>
 </body>
 </html>
