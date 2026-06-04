@@ -446,7 +446,16 @@
 
   /* ---------- ИИ-помощник → WhatsApp (заглушка: текст уходит менеджеру в WhatsApp) ---------- */
   function bindAiHelper() {
-    var box = document.querySelector(".ai-helper"); if (!box) return;
+    var box = document.querySelector(".ai-helper");
+    var floatAi = document.querySelector(".float-btn.is-ai");
+    if (floatAi && !floatAi.dataset.bound) {
+      floatAi.dataset.bound = "1";
+      floatAi.addEventListener("click", function () {
+        if (box) { box.scrollIntoView({ behavior: "smooth", block: "center" }); var i = box.querySelector(".ai-input"); if (i) setTimeout(function () { i.focus(); }, 450); }
+        else { track("whatsapp_click", { source: "float_ai" }); window.open("https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent("Здравствуйте! Помогите подобрать квартиру под бюджет."), "_blank", "noopener"); }
+      });
+    }
+    if (!box) return;
     var input = box.querySelector(".ai-input"), send = box.querySelector(".ai-send");
     function go() {
       var v = (input && input.value || "").trim();
