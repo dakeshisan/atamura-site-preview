@@ -221,13 +221,14 @@
             '<div class="zk-gallery">' + galTiles.map(function (u) { return u ? '<div class="zk-gtile"><img src="' + imgsrc(u) + '" alt="ЖК ' + z.name + '" loading="lazy"></div>' : '<div class="zk-gtile is-ph"></div>'; }).join("") + "</div>" +
             '<h2 class="zk-h2">О комплексе</h2><p class="zk-lead">' + (z.description || "") + "</p>" +
             '<div style="margin-top:var(--s-4)">' + roomChips + "</div>" +
-            (z.draft ? '<div class="note">Сайт этого комплекса сейчас не опубликован — показано предварительное описание. Заменим реальными данными и фото, как только сайт станет доступен.</div>' : "") +
+            (z.draft ? '<div class="note">Фото комплекса — иллюстративные: финальные рендеры добавим позже. Описание и характеристики — по данным застройщика.</div>' : "") +
             (feat ? '<h2 class="zk-h2" style="margin-top:var(--s-7)">Преимущества</h2><div class="feat-grid">' + feat + "</div>" : "") +
             (near ? '<h2 class="zk-h2" style="margin-top:var(--s-7)">Инфраструктура и дорога</h2><div class="feat-grid">' + near + "</div>" : "") +
             revHTML +
           "</div>" +
           '<aside class="zk-aside" id="zk-form"><div class="zk-card">' +
             '<div class="zk-card-price">' + priceLabel(z) + "</div>" +
+            (z.address ? '<div class="zk-card-addr" style="font-size:13px;color:var(--ink-soft);margin-top:6px;display:flex;gap:6px"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M9 1.6c2.9 0 5.3 2.4 5.3 5.3 0 4-5.3 9.5-5.3 9.5S3.7 10.9 3.7 6.9C3.7 4 6.1 1.6 9 1.6z"/><circle cx="9" cy="6.9" r="2"/></svg><span>' + z.address + "</span></div>" : "") +
             payHTML +
             '<div class="zk-card-note">Менеджер пришлёт подборку планировок и точный расчёт под ваш бюджет за 15 минут.</div>' +
             '<form class="lead-form" data-form="zk-' + z.slug + '">' +
