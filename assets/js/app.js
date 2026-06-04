@@ -323,6 +323,14 @@
   function renderCatalog() {
     var root = byId("catalog"); if (!root || !window.ATAMURA_FLATS) return;
     var ALL = window.ATAMURA_FLATS.slice();
+    /* Типы из строящихся ЖК без цены (Amaia/Dion → «Дуплекс»): показываем как опцию, но без выдуманных квартир.
+       UPCOMING[room] = [{slug,name}] — нужные ЖК для честного экрана «скоро». */
+    var UPCOMING = {};
+    (window.ATAMURA_ZHK || []).forEach(function (z) {
+      if (z.status === "Скоро" && !ALL.some(function (f) { return f.zk === z.slug; })) (z.rooms || []).forEach(function (r) {
+        if (!ALL.some(function (f) { return f.rooms === r; })) { (UPCOMING[r] = UPCOMING[r] || []).push({ slug: z.slug, name: z.name }); }
+      });
+    });
     var prices = ALL.map(function (f) { return f.priceFrom; });
     var PMIN = Math.min.apply(null, prices), PMAX = Math.max.apply(null, prices);
     var state = { rooms: [], zk: "", pmax: PMAX, deal: "", srok: "", sort: "price-asc", fav: false };
@@ -336,7 +344,7 @@
     if (q.get("sort")) state.sort = q.get("sort");
     if (q.get("fav")) state.fav = true;
 
-    var ROOM_OPTS = ROOM_ORDER.filter(function (r) { return ALL.some(function (f) { return f.rooms === r; }); });
+    var ROOM_OPTS = ROOM_ORDER.filter(function (r) { return ALL.some(function (f) { return f.rooms === r; }) || UPCOMING[r]; });
     var ZK_OPTS = []; ALL.forEach(function (f) { if (!ZK_OPTS.some(function (z) { return z.slug === f.zk; })) ZK_OPTS.push({ slug: f.zk, name: f.zkName }); });
     var SROK_OPTS = []; ALL.forEach(function (f) { if (f.srok && SROK_OPTS.indexOf(f.srok) < 0) SROK_OPTS.push(f.srok); });
 
@@ -358,7 +366,7 @@
         '<p class="cat-note">Цена — «от». Точную стоимость и подходящие квартиры подберёт менеджер.</p></div>' +
         '<button class="cat-fav-toggle" type="button" id="cat-fav" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-4.35-9.2-8.05C1 10.6 1.4 7.4 3.9 6.1c1.9-1 4.1-.4 5.3 1.2L12 10l2.8-2.7c1.2-1.6 3.4-2.2 5.3-1.2 2.5 1.3 2.9 4.5 1.1 6.85C18.5 16.65 12 21 12 21z"/></svg>Избранное<span class="cat-fav-n" id="cat-fav-n"></span></button></div>' +
       '<div class="cat-grid" id="cat-grid"></div>' +
-      '<div class="cat-empty" id="cat-empty" hidden><span id="cat-empty-msg">Под эти параметры вариантов нет.</span> <button class="btn btn-outline btn-sm" type="button" id="cat-empty-reset">Сбросить фильтр</button></div>';
+      '<div class="cat-empty" id="cat-empty" hidden><span id="cat-empty-msg">Под эти параметры вариантов нет.</span> <a class="btn btn-brand btn-sm" id="cat-empty-link" hidden></a> <button class="btn btn-outline btn-sm" type="button" id="cat-empty-reset">Сбросить фильтр</button></div>';
 
     var grid = byId("cat-grid"), count = byId("cat-count"), empty = byId("cat-empty");
     var pmaxR = byId("cat-pmax"), pmaxV = byId("cat-pmax-v"), zkS = byId("cat-zk"), dealS = byId("cat-deal"), srokS = byId("cat-srok"), sortS = byId("cat-sort");
@@ -400,10 +408,19 @@
       grid.innerHTML = list.map(flatCard).join("");
       empty.hidden = list.length > 0;
       grid.hidden = list.length === 0;
-      var em = byId("cat-empty-msg");
-      if (em) em.textContent = (state.fav && favs.length === 0)
-        ? "В избранном пока пусто — нажимайте ♥ на карточках квартир, чтобы сохранить."
-        : "Под эти параметры вариантов нет.";
+      var em = byId("cat-empty-msg"), elink = byId("cat-empty-link");
+      var upRoom = state.rooms.filter(function (r) { return UPCOMING[r]; })[0];
+      if (state.fav && favs.length === 0) {
+        if (em) em.textContent = "В избранном пока пусто — нажимайте ♥ на карточках квартир, чтобы сохранить.";
+        if (elink) elink.hidden = true;
+      } else if (list.length === 0 && upRoom) {
+        var zs = UPCOMING[upRoom];
+        if (em) em.textContent = roomLabel(upRoom) + " — в новых ЖК " + zs.map(function (z) { return z.name; }).join(" и ") + ". Старт продаж скоро — оставьте заявку, сообщим первыми.";
+        if (elink) { elink.hidden = false; elink.textContent = "Смотреть ЖК " + zs[0].name; elink.setAttribute("href", rel("zk/" + zs[0].slug + ".html")); }
+      } else {
+        if (em) em.textContent = "Под эти параметры вариантов нет.";
+        if (elink) elink.hidden = true;
+      }
       writeURL();
       paintFavCount();
     }
