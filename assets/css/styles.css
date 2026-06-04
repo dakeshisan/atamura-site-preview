@@ -440,6 +440,10 @@
   .mort-bullets { display: grid; gap: var(--s-3); margin-bottom: var(--s-6); }
   .mort-bullet { font-size: 14px; color: var(--ink); display: flex; gap: var(--s-3); align-items: flex-start; }
   .mort-bullet svg { color: var(--brand); margin-top: 2px; flex-shrink: 0; }
+  .mort-status { font-size: 13px; line-height: 1.5; color: var(--ink); background: var(--accent-soft); border: 1px solid var(--accent); border-radius: var(--r-md); padding: 12px 14px; margin-bottom: var(--s-4); }
+  .mort-status strong { color: var(--accent-deep); }
+  .mort-alt { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin: 0 0 var(--s-5); }
+  .mort-alt strong { color: var(--ink); font-weight: 600; }
 
   .mort-card { background: var(--card); border-radius: var(--r-lg); padding: var(--s-7); display: grid; gap: var(--s-5); box-shadow: var(--shadow-card); border: 1px solid var(--line); }
   .mort-card h3 { font-size: 20px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }

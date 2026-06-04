@@ -68,32 +68,7 @@
     b.addEventListener("click", function () { location.href = rel("flats.html"); });
   });
 
-  /* ---------- Калькулятор ипотеки ---------- */
-  (function () {
-    var cost = byId("cost"), down = byId("down"), years = byId("years");
-    if (!cost || !down || !years) return;
-    var costLabel = byId("costLabel"), downLabel = byId("downLabel"), yearsLabel = byId("yearsLabel"), result = byId("monthlyResult");
-    function calc() {
-      var C = +cost.value, dPct = +down.value, D = C * dPct / 100, loan = C - D;
-      var Y = +years.value, n = Y * 12, r = 0.114 / 12;
-      var monthly = loan * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-      if (costLabel) costLabel.textContent = money(C) + " ₸";
-      if (downLabel) downLabel.textContent = money(D) + " ₸ (" + dPct + "%)";
-      if (yearsLabel) yearsLabel.textContent = Y + " лет";
-      if (result) result.innerHTML = money(monthly) + "<sub>₸/мес</sub>";
-      var wa = byId("mortWa");
-      if (wa) {
-        var msg = "Здравствуйте! Рассчитал на сайте ATAMURA: квартира ~" + money(C) + " ₸, первый взнос " + dPct + "% (" + money(D) + " ₸), срок " + Y + " лет → платёж ~" + money(monthly) + " ₸/мес. Подберите варианты под этот бюджет и помогите с точным расчётом.";
-        wa.href = "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(msg);
-      }
-    }
-    var calcTracked = false;
-    [cost, down, years].forEach(function (el) {
-      el.addEventListener("input", calc);
-      el.addEventListener("input", function () { if (!calcTracked) { calcTracked = true; track("mortgage_calc_used", { page: location.pathname }); } });
-    });
-    calc();
-  })();
+  /* Старый калькулятор 7-20-25/11,4% удалён — на главной единый калькулятор «Наурыз» (bindNauryzCalc). */
 
   /* ---------- Sticky bar ---------- */
   (function () {
@@ -631,8 +606,10 @@
       if (warn) { warn.hidden = !over; if (over) warn.textContent = "Заём " + money(loan) + " ₸ выше лимита «Наурыз» для Алматы (36 млн ₸). Увеличьте первый взнос."; }
       if (wa) wa.setAttribute("href", "https://wa.me/77007001111?text=" + encodeURIComponent("Здравствуйте! Интересует господдержка «Наурыз». Квартира " + money(P) + " ₸, первый взнос " + dpPct + "% (" + money(down) + " ₸). Подскажите по программе и точному расчёту."));
     }
-    price.addEventListener("input", calc);
-    dp.addEventListener("input", calc);
+    var nzTracked = false;
+    function nzTrack() { if (!nzTracked) { nzTracked = true; track("mortgage_calc_used", { calc: "nauryz", page: location.pathname }); } }
+    price.addEventListener("input", calc); price.addEventListener("input", nzTrack);
+    dp.addEventListener("input", calc); dp.addEventListener("input", nzTrack);
     calc();
   }
 
