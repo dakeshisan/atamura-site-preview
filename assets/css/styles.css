@@ -735,17 +735,17 @@
 
   /* ============ КАТАЛОГ КВАРТИР (/flats) ============ */
   .cat-bar { display: grid; grid-template-columns: auto 1fr auto auto auto; gap: var(--s-4); align-items: end;
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-5); box-shadow: var(--shadow-card); position: sticky; top: 84px; z-index: 30; }
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-4); box-shadow: var(--shadow-card); position: sticky; top: 84px; z-index: 30; }
   .cat-chips { display: flex; gap: 6px; flex-wrap: wrap; }
-  .cat-chip { min-height: 44px; padding: 0 16px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--bg); font: 600 14px/1 inherit; color: var(--ink); transition: 140ms; }
+  .cat-chip { min-height: 38px; padding: 0 13px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--bg); font: 600 13px/1 inherit; color: var(--ink); transition: 140ms; }
   .cat-chip:hover { border-color: var(--ink-mute); }
   .cat-chip.is-on { background: var(--brand); color: var(--brand-on); border-color: var(--brand); }
   .cat-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
   .cat-field label { font: 600 11px/1 inherit; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); }
-  .cat-field select { min-height: 44px; border: 1px solid var(--line); border-radius: var(--r-md); padding: 0 12px; font: 500 14px inherit; background: var(--bg); color: var(--ink); }
+  .cat-field select { min-height: 38px; border: 1px solid var(--line); border-radius: var(--r-md); padding: 0 10px; font: 500 13px inherit; background: var(--bg); color: var(--ink); }
   .cat-field input[type=range] { width: 100%; min-width: 160px; accent-color: var(--brand); margin: 8px 0 2px; }
   .cat-field output { font: 700 14px inherit; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .cat-reset { min-height: 44px; padding: 0 16px; border-radius: var(--r-pill); border: 1px solid var(--line); background: transparent; font: 600 13px inherit; color: var(--ink-soft); transition: 140ms; }
+  .cat-reset { min-height: 38px; padding: 0 14px; border-radius: var(--r-pill); border: 1px solid var(--line); background: transparent; font: 600 13px inherit; color: var(--ink-soft); transition: 140ms; }
   .cat-reset:hover { border-color: var(--ink); color: var(--ink); }
 
   .cat-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-4); margin: var(--s-7) 0 var(--s-5); flex-wrap: wrap; }
@@ -941,7 +941,7 @@
   .head.over.is-stuck .login-btn { color: var(--ink); border-color: var(--line); }
 
   /* Каталог-конвертер (type-level): фильтр-бар на flex, переносится; без избранного */
-  .cat-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--s-4); }
+  .cat-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 18px; }
   .cat-bar .cat-field { flex: 0 0 auto; }
   .cat-field-rooms { flex: 0 0 auto; }
   .cat-field-wide { flex: 1 1 220px; min-width: 200px; }
