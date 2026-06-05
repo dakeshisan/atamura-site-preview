@@ -136,6 +136,9 @@
   }
 
   /* ---------- Лид-формы (валидация → заглушка → localStorage → /спасибо) ---------- */
+  /* URL Cloudflare Worker для отправки заявок в Telegram. Пусто → fallback в localStorage.
+     Установка: см. docs/SETUP_TELEGRAM_LEADS.md (создать бот → chat_id → задеплоить воркер → вставить URL ниже). */
+  var LEAD_WEBHOOK = "";
   function bindForms(scope) {
     bindPhones(scope);
     (scope || document).querySelectorAll("form.lead-form").forEach(function (f) {
@@ -149,7 +152,11 @@
         data.ref = document.referrer || "прямой заход"; data.utm = location.search || ""; data.ts = new Date().toISOString();
         try { var q = JSON.parse(localStorage.getItem("atamura_leads") || "[]"); q.push(data); localStorage.setItem("atamura_leads", JSON.stringify(q)); } catch (e2) {}
         track("form_submitted", { form_type: data.source, page: data.page, messenger: data.messenger || "" });
-        location.href = rel("spasibo.html");
+        var done = function(){ location.href = rel("spasibo.html"); };
+        if (LEAD_WEBHOOK) {
+          // Отправляем в Telegram через Cloudflare Worker. Не блокируем UX: при ошибке всё равно ведём на «Спасибо» — заявка в localStorage не потерялась.
+          fetch(LEAD_WEBHOOK, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data), keepalive: true }).then(done).catch(done);
+        } else { done(); }
       });
     });
   }
