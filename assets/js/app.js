@@ -171,6 +171,12 @@
         '<span class="pcard-price">' + price + "</span></div></a>";
   }
 
+  /* Координаты ЖК для карты (OSM, геокодинг Nominatim 2026-06) */
+  var ZK_COORDS = {
+    atmosfera: [43.32747, 77.01888], aura: [43.35569, 77.12833], keruen: [43.31552, 77.06125],
+    aqsai: [43.17252, 76.75856], bravo: [43.42703, 77.02529], discovery: [43.39667, 77.03202],
+    monarch: [43.20875, 76.96194], arlan: [43.29903, 77.04075]
+  };
   /* ---------- Страница ЖК (детальная, рендер из window.ATAMURA_ZHK) ---------- */
   function renderZhkDetail() {
     var host = byId("zhk-detail"); if (!host || !window.ATAMURA_ZHK) return;
@@ -199,8 +205,10 @@
     });
     var near = z.nearby || [];
     var mapQ = encodeURIComponent("ЖК " + z.name + " " + (z.address || z.district || "") + " Алматы");
+    var _c = ZK_COORDS[slug]; var mapSrc = _c ? "https://www.openstreetmap.org/export/embed.html?bbox=" + (_c[1] - 0.019) + "," + (_c[0] - 0.009) + "," + (_c[1] + 0.019) + "," + (_c[0] + 0.009) + "&layer=mapnik&marker=" + _c[0] + "," + _c[1] : "";
     var locBlock = block("Локация",
       (z.address ? '<p class="zk-lead" style="margin-bottom:var(--s-4)"><strong>Адрес:</strong> ' + z.address + (z.district && z.address.indexOf(z.district) < 0 ? " · " + z.district : "") + "</p>" : "") +
+      (mapSrc ? '<div class="zk-map"><iframe title="Карта — ЖК ' + z.name + '" src="' + mapSrc + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>' : "") +
       '<div class="zk-maplinks"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 1.6c2.9 0 5.3 2.4 5.3 5.3 0 4-5.3 9.5-5.3 9.5S3.7 10.9 3.7 6.9C3.7 4 6.1 1.6 9 1.6z"/><circle cx="9" cy="6.9" r="2"/></svg><span class="zk-maplinks-label">Открыть на карте:</span><a href="https://2gis.kz/almaty/search/' + mapQ + '" target="_blank" rel="noopener">2GIS</a><a href="https://www.google.com/maps/search/?api=1&query=' + mapQ + '" target="_blank" rel="noopener">Google&nbsp;Maps</a><a href="https://yandex.ru/maps/?text=' + mapQ + '" target="_blank" rel="noopener">Яндекс</a></div>' +
       (near.length ? '<h3 class="zk-h3">Инфраструктура и дорога</h3><div class="feat-grid">' + featList(near) + "</div>" : ""));
     var planBlock = softBlock("Генплан и планировки", "Генплан территории и планировки квартир под вашу комнатность пришлём по запросу — нажмите «Получить подборку», менеджер вышлет PDF.");

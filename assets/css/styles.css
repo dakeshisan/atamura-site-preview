@@ -730,6 +730,8 @@
   .zk-gtile.is-ph { background: linear-gradient(135deg, var(--brand-soft), var(--line-soft)); }
   .zk-h2 { font-size: var(--t-h3); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 var(--s-4); }
   .zk-h3 { font-size: 16px; font-weight: 600; color: var(--ink); margin: var(--s-5) 0 var(--s-3); }
+  .zk-map { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); margin-top: var(--s-3); }
+  .zk-map iframe { display: block; width: 100%; height: 280px; border: 0; }
   .zk-maplinks { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: var(--s-3); padding: 14px 16px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); font-size: 14px; }
   .zk-maplinks svg { color: var(--brand); flex-shrink: 0; }
   .zk-maplinks-label { color: var(--ink-soft); }
