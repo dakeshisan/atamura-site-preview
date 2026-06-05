@@ -30,15 +30,12 @@ window.ATAMURA_ZHK = [
     ],
     "address": "мкр. Нуршашкан, ул. Алатау, 36",
     "statusDetail": "",
-    "hero_image": "assets/img/zhk/atmosfera.jpg",
+    "hero_image": "assets/img/zhk/atmosfera-real.jpg",
     "gallery": [
-      "https://static.tildacdn.pro/tild3163-3564-4163-b862-303262386631/8228.jpg",
-      "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1400&q=80"
+      "assets/img/zhk/atmosfera-real-2023.jpg",
+      "assets/img/zhk/atmosfera.jpg"
     ],
-    "realPhotos": 1,
+    "realPhotos": 3,
     "site": "https://atmo.atamuragroup.kz",
     "draft": false
   },
@@ -70,15 +67,14 @@ window.ATAMURA_ZHK = [
     ],
     "address": "ул. Сырым Датулы, 100а",
     "statusDetail": "строится; 2-я очередь — сдача во II кв. 2026",
-    "hero_image": "https://static.tildacdn.pro/tild6636-3162-4331-a236-343861303563/1-6.jpg",
+    "hero_image": "assets/img/zhk/aura.jpg",
     "gallery": [
+      "https://static.tildacdn.pro/tild6636-3162-4331-a236-343861303563/1-6.jpg",
       "https://static.tildacdn.pro/tild6265-3731-4533-a661-343463313861/03-1.jpg",
       "https://static.tildacdn.pro/tild3239-3236-4136-b662-316161373938/04.jpg",
-      "https://static.tildacdn.pro/tild3430-3638-4162-b230-376164656666/05.jpg",
-      "https://static.tildacdn.pro/tild3832-6136-4436-b964-353339663166/06.jpg",
-      "https://static.tildacdn.pro/tild3434-6534-4063-b762-356661336331/07.jpg"
+      "https://static.tildacdn.pro/tild3430-3638-4162-b230-376164656666/05.jpg"
     ],
-    "realPhotos": 6,
+    "realPhotos": 7,
     "site": "https://aura.atamuragroup.kz",
     "draft": false
   },
@@ -295,15 +291,9 @@ window.ATAMURA_ZHK = [
     ],
     "address": "ул. Сырым батыра, 80",
     "statusDetail": "",
-    "hero_image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1400&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80"
-    ],
-    "realPhotos": 0,
+    "hero_image": "assets/img/zhk/arlan.jpg",
+    "gallery": [],
+    "realPhotos": 1,
     "site": "https://arlan.atamuragroup.kz",
     "draft": true
   },
@@ -364,7 +354,7 @@ window.ATAMURA_ZHK = [
     "description": "Tengri Park — новый проект ATAMURA Group. Параметры комплекса, планировки и цены будут опубликованы позже. Оставьте заявку — менеджер сообщит о старте продаж в первую очередь.",
     "highlights": [],
     "nearby": [],
-    "hero_image": "",
+    "hero_image": "assets/img/zhk/tengri-park.jpg",
     "gallery": [],
     "realPhotos": 0,
     "site": "",
