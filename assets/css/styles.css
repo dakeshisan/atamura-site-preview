@@ -580,9 +580,42 @@
     .mortgage-grid { display: flex; flex-direction: column; gap: var(--s-5); }
     .mortgage .mortgage-info { display: none; }
     .mortgage h2 { font-size: 26px; }
-    /* === Заголовки секций — бренд справа === */
-    .sect-projects-row1 .sect-title-txt { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; width: 100%; flex-wrap: wrap; }
-    .sect-projects-row1 .sect-title-brand { flex: 0 0 auto; color: var(--brand); }
+    /* === Центрирование текстов и заголовков на мобиле (PM-фидбэк, run 5) === */
+    .sect-title, .reviews-head h2, .sect-head h2, .faq h2 { text-align: center; }
+    .sect-title-brand { color: var(--brand); }
+    .sect-projects-row1 { align-items: center; text-align: center; }
+    .sect-projects-row1 .actions-row { justify-content: center; }
+    .premium-row h2 { text-align: center; }
+    .premium-card { text-align: center; }
+    .premium-card .premium-body { align-items: center; }
+    .premium-card .premium-sub { margin-left: auto; margin-right: auto; }
+    .premium-tag { left: 50%; right: auto; transform: translateX(-50%); }
+    .premium-arrow { margin: 12px auto 0; }
+    /* Mortgage h2 уже скрыт (mortgage-info display:none), но если показывается — центру */
+    .mortgage h2 { text-align: center; }
+    /* Способы покупки — карточки центрируем */
+    .buy-card { text-align: center; }
+    .buy-card .buy-ic { margin-left: auto; margin-right: auto; }
+    /* Отзывы */
+    .reviews-head { flex-direction: column; align-items: center; gap: 8px; }
+    .review { text-align: center; }
+    .review-author { justify-content: center; }
+    /* ЖК-страницы — заголовки и леды центру */
+    .zk-h2, .zk-lead { text-align: center; }
+    .zk-h2 { margin-left: auto; margin-right: auto; }
+    .zk-section .feat-grid { justify-items: stretch; }
+    /* Контакты / pagehero */
+    .pagehero-title { text-align: center; }
+    .pagehero-lead { text-align: center; margin-left: auto; margin-right: auto; }
+    .crumbs { justify-content: center; }
+    /* Футер */
+    .foot .foot-grid { text-align: center; }
+    .foot .foot-col h4 { text-align: center; }
+    .foot .foot-col ul { display: flex; flex-direction: column; align-items: center; }
+    .foot .foot-grid > div:first-child > a.logo { justify-content: center; }
+    .foot .foot-grid > div:first-child .foot-phone,
+    .foot .foot-grid > div:first-child .foot-hours { text-align: center; }
+    .foot-bottom { justify-content: center; text-align: center; }
     /* === Промо — 3 карточки → горизонтальная карусель, бренд-цвет на is-discount === */
     .premium-grid { grid-template-columns: none !important; }
     .premium-card { min-height: 220px; }
