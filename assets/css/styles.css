@@ -531,6 +531,7 @@
   /* ===== Мобильная нижняя навигация (level.ru-style) ===== */
   .botnav { display: none; }
   .hh-cta-m { display: none; }
+  .hh-promo { display: none; }
   @media (max-width: 768px) {
     .botnav { display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: var(--card); border-top: 1px solid var(--line); padding: 6px 2px calc(6px + env(safe-area-inset-bottom)); box-shadow: 0 -2px 18px oklch(0% 0 0 / 0.08); }
     .botnav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 500; line-height: 1; color: var(--ink-soft); text-decoration: none; background: none; border: 0; padding: 7px 2px 3px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -544,8 +545,11 @@
     /* Чище мобильный герой (по level.ru): прячем форму поиска, оставляем одну кнопку */
     .home-hero .herosearch { display: none; }
     .home-hero .hh-offer, .home-hero .hh-meta { display: none; }
-    .home-hero .hh-brand { font-size: 11px; }
+    .home-hero .hh-brand { display: none; }
     .home-hero .hh-sliderui { display: none; }
+    .trust { display: none; }
+    .hh-promo { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #fff; background: oklch(100% 0 0 / 0.15); border: 1px solid oklch(100% 0 0 / 0.32); padding: 7px 15px; border-radius: 999px; margin-top: 6px; }
+    .hh-promo b { color: var(--accent); font-weight: 700; }
     .hh-cta-m { display: inline-flex; justify-content: center; width: 100%; max-width: 340px; padding: 15px 24px; font-size: 15px; margin-top: 20px; }
     /* Промо — горизонтальная карусель */
     .premium-grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
@@ -999,7 +1003,7 @@
   @media (max-width: 760px) {
     .home-hero { min-height: auto; align-items: flex-start; }
     .home-hero::before { height: 120px; }
-    .home-hero-inner { padding: 96px 0 28px; }
+    .home-hero-inner { padding: 124px 0 28px; }
     .hh-title { font-size: clamp(30px, 8vw, 40px); }
     .hh-meta { font-size: 12px; line-height: 1.45; }
     .floater { bottom: 18px; right: 14px; }
