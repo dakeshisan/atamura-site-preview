@@ -182,13 +182,40 @@
     var heroImg = imgsrc(gal[0] || "");
     var galTiles = gal.slice(1, 6); while (galTiles.length < 4) galTiles.push(null);
 
-    var feat = (z.highlights || []).map(function (h) {
+    function featList(arr) { return (arr || []).map(function (h) {
       return '<div class="feat"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9l3.2 3.2L14 5.5"/></svg><span>' + h + "</span></div>";
-    }).join("");
-    /* H2 — инфраструктура и дорога (закрывает возражение «далеко»); только реальные факты из данных ЖК */
-    var near = (z.nearby || []).map(function (h) {
-      return '<div class="feat"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 1.6c2.9 0 5.3 2.4 5.3 5.3 0 4-5.3 9.5-5.3 9.5S3.7 10.9 3.7 6.9C3.7 4 6.1 1.6 9 1.6z"/><circle cx="9" cy="6.9" r="2"/></svg><span>' + h + "</span></div>";
-    }).join("");
+    }).join(""); }
+    function block(t, body) { return '<h2 class="zk-h2" style="margin-top:var(--s-7)">' + t + "</h2>" + body; }
+    function featBlock(t, arr) { return arr.length ? block(t, '<div class="feat-grid">' + featList(arr) + "</div>") : ""; }
+    function softBlock(t, text) { return block(t, '<div class="note">' + text + "</div>"); }
+    /* Категоризация преимуществ ЖК по смысловым блокам (рекомендации маркетинга) */
+    var H = z.highlights || [], arch = [], land = [], sec = [], other = [];
+    H.forEach(function (h) {
+      if (/монолит|газоблок|фиброцемент|фасад|каркас|архитектур|материал|потолк|панел|сейсм|кирпич|окна|этаж/i.test(h)) arch.push(h);
+      else if (/видеонаблюд|охран|шлагбаум|закрыт|безопас|консьерж|периметр|ограждени|двер/i.test(h)) sec.push(h);
+      else if (/двор|парк|площадк|озелен|благоустр|алле|прогул|сквер|зелён|зелен|forest|relax|воркаут|work|сезон|каток|\bсад/i.test(h)) land.push(h);
+      else other.push(h);
+    });
+    var near = z.nearby || [];
+    var mapQ = encodeURIComponent("ЖК " + z.name + " " + (z.address || z.district || "") + " Алматы");
+    var locBlock = block("Локация",
+      (z.address ? '<p class="zk-lead" style="margin-bottom:var(--s-4)"><strong>Адрес:</strong> ' + z.address + (z.district && z.address.indexOf(z.district) < 0 ? " · " + z.district : "") + "</p>" : "") +
+      '<div class="zk-maplinks"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 1.6c2.9 0 5.3 2.4 5.3 5.3 0 4-5.3 9.5-5.3 9.5S3.7 10.9 3.7 6.9C3.7 4 6.1 1.6 9 1.6z"/><circle cx="9" cy="6.9" r="2"/></svg><span class="zk-maplinks-label">Открыть на карте:</span><a href="https://2gis.kz/almaty/search/' + mapQ + '" target="_blank" rel="noopener">2GIS</a><a href="https://www.google.com/maps/search/?api=1&query=' + mapQ + '" target="_blank" rel="noopener">Google&nbsp;Maps</a><a href="https://yandex.ru/maps/?text=' + mapQ + '" target="_blank" rel="noopener">Яндекс</a></div>' +
+      (near.length ? '<h3 class="zk-h3">Инфраструктура и дорога</h3><div class="feat-grid">' + featList(near) + "</div>" : ""));
+    var planBlock = softBlock("Генплан и планировки", "Генплан территории и планировки квартир под вашу комнатность пришлём по запросу — нажмите «Получить подборку», менеджер вышлет PDF.");
+    var progressBlock = softBlock("Ход строительства", "Фотоотчёт хода строительства обновляем регулярно — актуальные фото пришлёт менеджер, следите за обновлениями в Instagram @atamura.group.");
+    var docsBlock = softBlock("Документы", "Разрешительные документы (проектная декларация, разрешение на строительство, договор) предоставляем по запросу в отделе продаж.");
+    var blob = (H.join(" ") + " " + (z.description || "")).toLowerCase();
+    var faqItems = [["Когда сдача комплекса?", z.status === "Сдан" ? "Дом сдан и заселён." : z.status === "Скоро" ? "Старт продаж — скоро. Оставьте заявку, сообщим о начале." : "Комплекс строится. Точные сроки сдачи (по очередям) подскажет менеджер."]];
+    faqItems.push(["Какая форма оплаты и первый взнос?", "Ипотека (госпрограммы 7-20-25 и Отбасы «Наурыз»), рассрочка 0% от застройщика, ЕНПФ на первый взнос. Первый взнос — от 20% (по госпрограммам — от 10%)."]);
+    if (/чернов/.test(blob)) faqItems.push(["Какая отделка?", "Квартиры сдаются с черновой отделкой."]);
+    if (/паркинг|парков/.test(blob)) faqItems.push(["Есть ли паркинг?", "Да, на территории предусмотрены парковочные места."]);
+    if (/сейсм/.test(blob)) faqItems.push(["Какая сейсмостойкость?", "Конструкция рассчитана на сейсмостойкость до 9 баллов."]);
+    var schools = near.filter(function (n) { return /школ|садик|детский сад|детсад|гимназ|лице/i.test(n); });
+    if (schools.length) faqItems.push(["Какие школы и садики рядом?", schools.join("; ") + "."]);
+    faqItems.push(["Можно ли купить через ипотеку?", "Да — через банки-партнёры и госпрограммы. Калькулятор на сайте посчитает платёж, менеджер подберёт программу."]);
+    faqItems.push(["Где находится отдел продаж?", "Алматы, ул. Толе би, 12 (и шоурумы у комплексов). Точный адрес для визита подскажет менеджер."]);
+    var faqBlock = block("Вопросы и ответы", '<div class="faq-list">' + faqItems.map(function (q) { return '<details class="faq-item"><summary>' + q[0] + '</summary><div class="faq-a">' + q[1] + "</div></details>"; }).join("") + "</div>");
     /* H3 — отзыв жильца по этому ЖК, если есть */
     var rev = ZK_REVIEWS[slug];
     var revHTML = rev ? '<h2 class="zk-h2" style="margin-top:var(--s-7)">Отзыв жильца</h2>' +
@@ -225,15 +252,22 @@
             '<h2 class="zk-h2">О комплексе</h2><p class="zk-lead">' + (z.description || "") + "</p>" +
             '<div style="margin-top:var(--s-4)">' + roomChips + "</div>" +
             (z.draft ? '<div class="note">Фото комплекса — иллюстративные: финальные рендеры добавим позже. Описание и характеристики — по данным застройщика.</div>' : "") +
-            (feat ? '<h2 class="zk-h2" style="margin-top:var(--s-7)">Преимущества</h2><div class="feat-grid">' + feat + "</div>" : "") +
-            (near ? '<h2 class="zk-h2" style="margin-top:var(--s-7)">Инфраструктура и дорога</h2><div class="feat-grid">' + near + "</div>" : "") +
+            locBlock +
+            planBlock +
+            featBlock("Архитектура и материалы", arch) +
+            featBlock("Благоустройство", land) +
+            featBlock("Безопасность", sec) +
+            featBlock("Преимущества", other) +
+            progressBlock +
+            docsBlock +
             revHTML +
+            faqBlock +
           "</div>" +
           '<aside class="zk-aside" id="zk-form"><div class="zk-card">' +
             '<div class="zk-card-price">' + priceLabel(z) + "</div>" +
             (z.address ? '<div class="zk-card-addr" style="font-size:13px;color:var(--ink-soft);margin-top:6px;display:flex;gap:6px"><svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M9 1.6c2.9 0 5.3 2.4 5.3 5.3 0 4-5.3 9.5-5.3 9.5S3.7 10.9 3.7 6.9C3.7 4 6.1 1.6 9 1.6z"/><circle cx="9" cy="6.9" r="2"/></svg><span>' + z.address + "</span></div>" : "") +
             payHTML +
-            '<div class="zk-card-note">Менеджер пришлёт подборку планировок и точный расчёт под ваш бюджет за 15 минут.</div>' +
+            '<div class="zk-card-note">Менеджер пришлёт подборку планировок и точный расчёт под ваш бюджет.</div>' +
             '<form class="lead-form" data-form="zk-' + z.slug + '">' +
               '<input class="input-pill" name="name" aria-label="Ваше имя" placeholder="Ваше имя" />' +
               '<input class="input-pill" name="phone" type="tel" required aria-label="Номер телефона" placeholder="+7 (___) ___-__-__" />' +

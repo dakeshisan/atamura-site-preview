@@ -699,6 +699,11 @@
   .zk-gtile:hover img { transform: scale(1.05); }
   .zk-gtile.is-ph { background: linear-gradient(135deg, var(--brand-soft), var(--line-soft)); }
   .zk-h2 { font-size: var(--t-h3); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 var(--s-4); }
+  .zk-h3 { font-size: 16px; font-weight: 600; color: var(--ink); margin: var(--s-5) 0 var(--s-3); }
+  .zk-maplinks { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: var(--s-3); padding: 14px 16px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); font-size: 14px; }
+  .zk-maplinks svg { color: var(--brand); flex-shrink: 0; }
+  .zk-maplinks-label { color: var(--ink-soft); }
+  .zk-maplinks a { color: var(--brand-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
   .zk-lead { font-size: 16px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
   .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
   .feat { display: flex; gap: var(--s-3); align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); padding: var(--s-4); font-size: 14px; line-height: 1.4; }
