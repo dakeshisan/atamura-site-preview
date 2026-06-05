@@ -476,11 +476,11 @@
   .reviews h2 { font-size: var(--t-h2); font-weight: 600; letter-spacing: -0.025em; margin: 0; }
   .reviews-rating { display: inline-flex; align-items: center; gap: var(--s-3); background: var(--card); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 10px 18px; font-size: 14px; }
   .reviews-rating strong { font-size: 18px; font-weight: 700; }
-  .stars { color: var(--accent-deep); letter-spacing: 1px; }
+  .stars { color: #7A6328; letter-spacing: 1px; }
 
   .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); }
   .review { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-3); }
-  .review-stars { color: var(--accent-deep); font-size: 13px; letter-spacing: 1.5px; }
+  .review-stars { color: #7A6328; font-size: 13px; letter-spacing: 1.5px; }
   .review p { font-size: 14px; line-height: 1.55; color: var(--ink); margin: 0; }
   .review-author { display: flex; align-items: center; gap: var(--s-3); padding-top: var(--s-3); border-top: 1px solid var(--line); margin-top: auto; }
   .review-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--brand-soft); display: grid; place-items: center; font-size: 13px; font-weight: 600; color: var(--brand-deep); }
@@ -848,6 +848,8 @@
   .cmp-table thead th { background: var(--brand-soft); color: var(--ink); font-weight: 600; }
   .cmp-table .cmp-row-label { font-weight: 600; color: var(--ink-soft); width: 180px; background: var(--bg); }
   .cmp-th-link a { font-size: 12px; font-weight: 500; color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+  .zk-share { display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center; margin-top: 10px; font-size: 14px; color: #25D366 !important; border-color: #25D366 !important; }
+  .zk-share:hover { background: #25D366; color: #fff !important; }
   .zk-map { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); margin-top: var(--s-3); }
   .zk-map iframe { display: block; width: 100%; height: 280px; border: 0; }
   .zk-maplinks { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: var(--s-3); padding: 14px 16px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); font-size: 14px; }

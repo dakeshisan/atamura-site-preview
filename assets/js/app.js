@@ -45,17 +45,39 @@
     aqsai: { stars: "★★★★☆", text: "Брали таунхаус в Aqsai. Сдали с задержкой 2 месяца, но честно предупредили. После заселения мелкие косяки исправили без споров.", name: "Дамир Т.", sub: "Aqsai Resort, таунхаус", av: "ДТ" }
   };
 
-  /* ---------- Burger / mobile drawer ---------- */
+  /* ---------- Burger / mobile drawer (+ a11y focus-trap, aria-modal) ---------- */
   (function () {
     var burger = byId("burger"), drawer = byId("drawer");
     if (!burger || !drawer) return;
-    function open() { drawer.classList.add("is-on"); burger.classList.add("is-on"); document.body.classList.add("drawer-open"); }
-    function close() { drawer.classList.remove("is-on"); burger.classList.remove("is-on"); document.body.classList.remove("drawer-open"); }
+    var lastFocus = null;
+    function focusables() {
+      return drawer.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    }
+    function open() {
+      lastFocus = document.activeElement;
+      drawer.classList.add("is-on"); burger.classList.add("is-on"); document.body.classList.add("drawer-open");
+      drawer.setAttribute("aria-modal", "true");
+      var first = focusables()[0]; if (first) setTimeout(function () { first.focus(); }, 50);
+    }
+    function close() {
+      drawer.classList.remove("is-on"); burger.classList.remove("is-on"); document.body.classList.remove("drawer-open");
+      drawer.removeAttribute("aria-modal");
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
     burger.addEventListener("click", function () { drawer.classList.contains("is-on") ? close() : open(); });
     [].forEach.call(document.querySelectorAll("[data-open-drawer]"), function (el) { el.addEventListener("click", open); });
     drawer.addEventListener("click", function (e) { if (e.target === drawer) close(); });
     var x = drawer.querySelector(".drawer-close"); if (x) x.addEventListener("click", close);
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    document.addEventListener("keydown", function (e) {
+      if (!drawer.classList.contains("is-on")) return;
+      if (e.key === "Escape") { close(); return; }
+      if (e.key === "Tab") {
+        var f = focusables(); if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
   })();
 
   /* ---------- Проекты/Квартиры toggle ---------- */
@@ -636,6 +658,20 @@
      Перенос выверенной модели из deliverables/nauryz_mortgage_calculator.html, упрощённо:
      база 7%, Алматы (лимит займа 36 млн), ОП=16 → 2-й этап 5%, сроки 8+11 лет, цель депозита 50%.
      1-й этап — только проценты + накопление на депозит ЖСС (2% + госпремия 20%, ≤200 МРП). */
+  /* Sticky CTA при скролле: показываем когда уехали с героя (>500px) и не закрывали явно */
+  function bindStickyPromo() {
+    var bar = byId("stickyBar"); if (!bar) return;
+    if (sessionStorage.getItem("atamura_sticky_closed") === "1") return;
+    var visible = false;
+    function onScroll() {
+      var should = window.scrollY > 480;
+      if (should !== visible) { visible = should; bar.classList.toggle("is-on", should); }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    var x = bar.querySelector(".sticky-close");
+    if (x) x.addEventListener("click", function () { try { sessionStorage.setItem("atamura_sticky_closed", "1"); } catch (e) {} });
+    onScroll();
+  }
   function bindNauryzCalc() {
     var price = byId("nzPrice"), dp = byId("nzDp");
     if (!price || !dp) return;
@@ -680,6 +716,7 @@
     bindFavCount();
     bindLang();
     bindNauryzCalc();
+    bindStickyPromo();
     /* Делегированный трекинг исходящих контактов (без PII) */
     document.addEventListener("click", function (e) {
       var t = e.target;
