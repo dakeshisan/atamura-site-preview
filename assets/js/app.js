@@ -52,6 +52,7 @@
     function open() { drawer.classList.add("is-on"); burger.classList.add("is-on"); document.body.classList.add("drawer-open"); }
     function close() { drawer.classList.remove("is-on"); burger.classList.remove("is-on"); document.body.classList.remove("drawer-open"); }
     burger.addEventListener("click", function () { drawer.classList.contains("is-on") ? close() : open(); });
+    [].forEach.call(document.querySelectorAll("[data-open-drawer]"), function (el) { el.addEventListener("click", open); });
     drawer.addEventListener("click", function (e) { if (e.target === drawer) close(); });
     var x = drawer.querySelector(".drawer-close"); if (x) x.addEventListener("click", close);
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
