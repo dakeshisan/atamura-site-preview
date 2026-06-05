@@ -752,6 +752,41 @@
   .zk-gtile.is-ph { background: linear-gradient(135deg, var(--brand-soft), var(--line-soft)); }
   .zk-h2 { font-size: var(--t-h3); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 var(--s-4); }
   .zk-h3 { font-size: 16px; font-weight: 600; color: var(--ink); margin: var(--s-5) 0 var(--s-3); }
+  /* ===== Карта-страница (все ЖК) ===== */
+  .map-page { display: grid; grid-template-columns: 340px 1fr; gap: var(--s-5); align-items: stretch; min-height: 560px; }
+  .map-page-list { display: flex; flex-direction: column; gap: 10px; max-height: 620px; overflow-y: auto; padding-right: 6px; }
+  .map-card { display: block; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); text-decoration: none; color: var(--ink); transition: border-color 160ms, transform 160ms; }
+  .map-card:hover { border-color: var(--brand); transform: translateY(-1px); }
+  .map-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .map-card-head strong { font-size: 15px; font-weight: 700; }
+  .map-card-status { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: var(--bg); color: var(--ink-soft); white-space: nowrap; }
+  .map-card-status.is-live { background: oklch(76% 0.16 145 / 0.18); color: oklch(36% 0.13 145); }
+  .map-card-status.is-done { background: var(--bg); color: var(--ink-soft); }
+  .map-card-status.is-soon { background: var(--accent-soft); color: var(--accent-deep); }
+  .map-card-meta { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+  .map-card-price { font-size: 14px; font-weight: 700; color: var(--brand-deep); margin-top: 8px; }
+  .map-page-map { min-height: 560px; }
+  .map-page-map #zkMap { border: 1px solid var(--line); }
+  @media (max-width: 980px) {
+    .map-page { grid-template-columns: 1fr; }
+    .map-page-list { max-height: none; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
+    .map-card { flex: 0 0 78%; scroll-snap-align: start; }
+    .map-page-map #zkMap { min-height: 420px !important; }
+  }
+  /* ===== Сравнение ЖК ===== */
+  .cmp-pick { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-5); margin-bottom: var(--s-5); }
+  .cmp-pick-title { font-weight: 600; margin-bottom: var(--s-3); }
+  .cmp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--s-4); }
+  .cmp-chip { display: inline-flex; align-items: center; padding: 8px 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; font-size: 14px; font-weight: 500; transition: 160ms; user-select: none; }
+  .cmp-chip:has(input:checked) { background: var(--brand); color: #fff; border-color: var(--brand); }
+  .cmp-chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .cmp-pick-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .cmp-table-wrap { overflow-x: auto; }
+  .cmp-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: var(--r-md); overflow: hidden; }
+  .cmp-table th, .cmp-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 14px; }
+  .cmp-table thead th { background: var(--brand-soft); color: var(--ink); font-weight: 600; }
+  .cmp-table .cmp-row-label { font-weight: 600; color: var(--ink-soft); width: 180px; background: var(--bg); }
+  .cmp-th-link a { font-size: 12px; font-weight: 500; color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
   .zk-map { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); margin-top: var(--s-3); }
   .zk-map iframe { display: block; width: 100%; height: 280px; border: 0; }
   .zk-maplinks { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: var(--s-3); padding: 14px 16px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); font-size: 14px; }
