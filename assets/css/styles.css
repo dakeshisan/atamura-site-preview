@@ -530,6 +530,7 @@
   .float-btn:hover { transform: scale(1.08); }
   /* ===== Мобильная нижняя навигация (level.ru-style) ===== */
   .botnav { display: none; }
+  .hh-cta-m { display: none; }
   @media (max-width: 768px) {
     .botnav { display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: var(--card); border-top: 1px solid var(--line); padding: 6px 2px calc(6px + env(safe-area-inset-bottom)); box-shadow: 0 -2px 18px oklch(0% 0 0 / 0.08); }
     .botnav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 500; line-height: 1; color: var(--ink-soft); text-decoration: none; background: none; border: 0; padding: 7px 2px 3px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -540,6 +541,18 @@
     .botnav-fab .botnav-fab-circle svg { width: 26px; height: 26px; }
     .floater, .sticky-bar { display: none !important; }
     body { padding-bottom: 66px; }
+    /* Чище мобильный герой (по level.ru): прячем форму поиска, оставляем одну кнопку */
+    .home-hero .herosearch { display: none; }
+    .home-hero .hh-offer, .home-hero .hh-meta { display: none; }
+    .home-hero .hh-brand { font-size: 11px; }
+    .home-hero .hh-sliderui { display: none; }
+    .hh-cta-m { display: inline-flex; justify-content: center; width: 100%; max-width: 340px; padding: 15px 24px; font-size: 15px; margin-top: 20px; }
+    /* Промо — горизонтальная карусель */
+    .premium-grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
+    .premium-card { flex: 0 0 80%; scroll-snap-align: start; }
+    /* Трастбар — компактная прокрутка */
+    .trustbar-row { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 16px; -webkit-overflow-scrolling: touch; }
+    .trustbar .tb-item { flex: 0 0 auto; white-space: nowrap; }
   }
   .float-btn.is-tg { background: var(--tg); }
   /* WhatsApp-пузырь: показываем только ≤980px, где скрыт .head-cta (на десктопе WhatsApp есть в шапке) */
