@@ -557,6 +557,28 @@
     /* Трастбар — компактная прокрутка */
     .trustbar-row { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 16px; -webkit-overflow-scrolling: touch; }
     .trustbar .tb-item { flex: 0 0 auto; white-space: nowrap; }
+    /* === Жилые комплексы — горизонтальная snap-карусель (level.ru-style) === */
+    .sect-projects .grid-3 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 12px; padding-bottom: 8px; scroll-padding-left: 4px; }
+    .sect-projects .grid-3 > * { flex: 0 0 86%; scroll-snap-align: start; }
+    .sect-projects .pcard-photo img { aspect-ratio: 4/3; object-fit: cover; }
+    .sect-projects-row1 { flex-direction: column; align-items: stretch; gap: var(--s-3); margin-bottom: var(--s-4); }
+    .sect-projects .actions-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sect-projects .actions-row .btn { flex: 1; min-width: 0; font-size: 13px; padding: 10px 12px; }
+    .sect-title { text-align: left; }
+    /* === Ипотека — калькулятор первым, без длинных буллетов === */
+    .mortgage-grid { display: flex; flex-direction: column; gap: var(--s-5); }
+    .mortgage .mort-card { order: 1; }
+    .mortgage .mortgage-info { order: 2; text-align: center; }
+    .mortgage .mortgage-info p { margin-left: auto; margin-right: auto; }
+    .mortgage .mort-bullets { display: none; }
+    .mortgage h2 { font-size: 26px; }
+    /* === Способы покупки — компактнее === */
+    .buy-card { padding: var(--s-4); }
+    .buy-card h3 { font-size: 15px; }
+    .buy-card p { font-size: 13px; }
+    /* === Отзывы — горизонтальная карусель === */
+    .reviews-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 12px; padding-bottom: 8px; }
+    .reviews-grid > * { flex: 0 0 86%; scroll-snap-align: start; }
   }
   .float-btn.is-tg { background: var(--tg); }
   /* WhatsApp-пузырь: показываем только ≤980px, где скрыт .head-cta (на десктопе WhatsApp есть в шапке) */
