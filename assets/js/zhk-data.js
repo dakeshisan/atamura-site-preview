@@ -348,5 +348,26 @@ window.ATAMURA_ZHK = [
     "realPhotos": 0,
     "site": "",
     "draft": true
+  },
+  {
+    "slug": "tengri-park",
+    "name": "Tengri Park",
+    "ru": "Тенгри Парк",
+    "district": "Алматы",
+    "segment": "",
+    "status": "Скоро",
+    "badge": "soon",
+    "rooms": [],
+    "priceFrom": 0,
+    "priceText": "Скоро",
+    "tagline": "Новый ЖК ATAMURA — скоро в продаже",
+    "description": "Tengri Park — новый проект ATAMURA Group. Параметры комплекса, планировки и цены будут опубликованы позже. Оставьте заявку — менеджер сообщит о старте продаж в первую очередь.",
+    "highlights": [],
+    "nearby": [],
+    "hero_image": "",
+    "gallery": [],
+    "realPhotos": 0,
+    "site": "",
+    "draft": true
   }
 ];
