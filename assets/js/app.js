@@ -658,6 +658,40 @@
      Перенос выверенной модели из deliverables/nauryz_mortgage_calculator.html, упрощённо:
      база 7%, Алматы (лимит займа 36 млн), ОП=16 → 2-й этап 5%, сроки 8+11 лет, цель депозита 50%.
      1-й этап — только проценты + накопление на депозит ЖСС (2% + госпремия 20%, ≤200 МРП). */
+  /* Мульти-шаг формы (.ms-form): чипы → hidden value, шаги вперёд/назад, прогресс-бар */
+  function bindMultistep() {
+    document.querySelectorAll(".ms-form").forEach(function (form) {
+      if (form.dataset.msBound) return; form.dataset.msBound = "1";
+      var steps = form.querySelectorAll(".ms-step");
+      var total = steps.length;
+      var bar = form.querySelector(".ms-progress-bar");
+      var current = form.querySelector(".ms-current");
+      var idx = 0;
+      function show(i) {
+        idx = Math.max(0, Math.min(total - 1, i));
+        steps.forEach(function (s, n) { s.classList.toggle("is-active", n === idx); });
+        if (bar) bar.style.width = ((idx + 1) / total * 100) + "%";
+        if (current) current.textContent = String(idx + 1);
+        track("form_step", { form_type: form.getAttribute("data-form") || "form", step: idx + 1 });
+      }
+      // Чипы: выбор → заполняем hidden + активируем "Далее"
+      form.querySelectorAll(".ms-chips").forEach(function (group) {
+        var hidden = group.parentElement.querySelector('input[type="hidden"]');
+        group.querySelectorAll(".ms-chip").forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            group.querySelectorAll(".ms-chip").forEach(function (c) { c.classList.remove("is-on"); });
+            chip.classList.add("is-on");
+            if (hidden) hidden.value = chip.getAttribute("data-value");
+            var next = group.parentElement.querySelector(".ms-next");
+            if (next) next.disabled = false;
+          });
+        });
+      });
+      form.querySelectorAll(".ms-next").forEach(function (b) { b.addEventListener("click", function () { show(idx + 1); }); });
+      form.querySelectorAll(".ms-prev").forEach(function (b) { b.addEventListener("click", function () { show(idx - 1); }); });
+      show(0);
+    });
+  }
   /* Sticky CTA при скролле: показываем когда уехали с героя (>500px) и не закрывали явно */
   function bindStickyPromo() {
     var bar = byId("stickyBar"); if (!bar) return;
@@ -717,6 +751,7 @@
     bindLang();
     bindNauryzCalc();
     bindStickyPromo();
+    bindMultistep();
     /* Делегированный трекинг исходящих контактов (без PII) */
     document.addEventListener("click", function (e) {
       var t = e.target;

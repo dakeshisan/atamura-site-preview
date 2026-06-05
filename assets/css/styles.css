@@ -848,6 +848,22 @@
   .cmp-table thead th { background: var(--brand-soft); color: var(--ink); font-weight: 600; }
   .cmp-table .cmp-row-label { font-weight: 600; color: var(--ink-soft); width: 180px; background: var(--bg); }
   .cmp-th-link a { font-size: 12px; font-weight: 500; color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+  /* ===== Мульти-шаг форма ===== */
+  .ms-form { display: flex; flex-direction: column; gap: var(--s-4); }
+  .ms-progress { width: 100%; height: 4px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .ms-progress-bar { height: 100%; background: var(--brand); border-radius: 99px; transition: width 280ms cubic-bezier(.2, .9, .25, 1); }
+  .ms-progress-label { font-size: 12px; color: var(--ink-soft); margin-top: -8px; }
+  .ms-step { display: none; flex-direction: column; gap: var(--s-3); }
+  .ms-step.is-active { display: flex; animation: msFade 280ms ease; }
+  @keyframes msFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .ms-q { font-size: 17px; font-weight: 600; margin: 0; color: var(--ink); }
+  .ms-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ms-chip { padding: 11px 16px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; font-size: 14px; font-weight: 500; cursor: pointer; transition: 160ms; color: var(--ink); }
+  .ms-chip:hover { border-color: var(--brand); }
+  .ms-chip.is-on { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .ms-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: var(--s-2); }
+  .ms-actions .btn { flex: 1; min-width: 0; }
+  .ms-next:disabled { opacity: 0.5; cursor: not-allowed; }
   .zk-share { display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center; margin-top: 10px; font-size: 14px; color: #25D366 !important; border-color: #25D366 !important; }
   .zk-share:hover { background: #25D366; color: #fff !important; }
   .zk-map { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); margin-top: var(--s-3); width: 100%; height: 360px; background: var(--bg); }
