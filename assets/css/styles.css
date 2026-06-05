@@ -581,7 +581,9 @@
     .mortgage .mortgage-info { display: none; }
     .mortgage h2 { font-size: 26px; }
     /* === Центрирование текстов и заголовков на мобиле (PM-фидбэк, run 5) === */
-    .sect-title, .reviews-head h2, .sect-head h2, .faq h2 { text-align: center; }
+    .sect-title { justify-content: center !important; text-align: center !important; }
+    .reviews-head h2, .sect-head h2, .faq h2 { text-align: center !important; }
+    .sect-head { text-align: center; }
     .sect-title-brand { color: var(--brand); }
     .sect-projects-row1 { align-items: center; text-align: center; }
     .sect-projects-row1 .actions-row { justify-content: center; }
