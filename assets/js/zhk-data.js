@@ -108,15 +108,9 @@ window.ATAMURA_ZHK = [
     ],
     "address": "ул. Жамакаева, 155",
     "statusDetail": "",
-    "hero_image": "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=80",
-    "gallery": [
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1400&q=80"
-    ],
-    "realPhotos": 0,
+    "hero_image": "assets/img/zhk/monarch.jpg",
+    "gallery": [],
+    "realPhotos": 1,
     "site": "https://monar.atamuragroup.kz",
     "draft": true
   },
