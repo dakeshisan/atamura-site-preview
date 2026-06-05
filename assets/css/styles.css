@@ -538,11 +538,12 @@
   /* ===== Мобильная нижняя навигация (level.ru-style) ===== */
   .botnav { display: none; }
   .hh-cta-m { display: none; }
-  .hh-promo { display: none; }
+  /* Промо-плашка в герое (на десктопе + мобиле): белая пилюля с золотым tag */
+  .hh-promo { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 7px 16px 7px 7px; background: oklch(100% 0 0 / 0.94); color: var(--ink); border-radius: 999px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 24px oklch(0% 0 0 / 0.22); }
+  .hh-promo b { color: var(--brand-deep); font-weight: 800; }
+  .hh-promo-tag { display: inline-flex; align-items: center; padding: 4px 10px; background: var(--accent); color: var(--accent-on); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 999px; }
+  /* Tag-чип в углу промо-карточек */
   .premium-tag { position: absolute; top: 14px; right: 14px; z-index: 3; padding: 6px 12px; background: var(--accent); color: var(--accent-on); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 999px; }
-  .hh-promo-tag { display: inline-flex; align-items: center; padding: 4px 10px; background: var(--accent); color: var(--accent-on); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 999px; margin-right: 8px; }
-  .hh-promo-hot { background: oklch(100% 0 0 / 0.92); color: var(--ink) !important; border-color: transparent !important; box-shadow: 0 8px 24px oklch(0% 0 0 / 0.18); padding: 7px 16px 7px 7px !important; }
-  .hh-promo-hot b { color: var(--brand-deep) !important; font-weight: 800; }
   @media (max-width: 768px) {
     .botnav { display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: var(--card); border-top: 1px solid var(--line); padding: 6px 2px calc(6px + env(safe-area-inset-bottom)); box-shadow: 0 -2px 18px oklch(0% 0 0 / 0.08); }
     .botnav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 500; line-height: 1; color: var(--ink-soft); text-decoration: none; background: none; border: 0; padding: 7px 2px 3px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -559,8 +560,7 @@
     .home-hero .hh-brand { display: none; }
     .home-hero .hh-sliderui { display: none; }
     .trust { display: none; }
-    .hh-promo { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #fff; background: oklch(100% 0 0 / 0.15); border: 1px solid oklch(100% 0 0 / 0.32); padding: 7px 15px; border-radius: 999px; margin-top: 6px; }
-    .hh-promo b { color: var(--accent); font-weight: 700; }
+    .hh-promo { font-size: 13px; padding: 6px 14px 6px 6px; }
     .hh-cta-m { display: inline-flex; justify-content: center; width: 100%; max-width: 340px; padding: 15px 24px; font-size: 15px; margin-top: 20px; }
     /* Промо — горизонтальная карусель */
     .premium-grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
