@@ -422,13 +422,20 @@
   /* ============ PREMIUM 2-CARD ============ */
   .premium-row { padding-block: var(--sect-py); }
   .premium-row h2 { font-size: var(--t-h2); font-weight: 600; letter-spacing: -0.025em; margin: 0 0 var(--s-5); }
-  .premium-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+  .premium-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); }
   .premium-card { border-radius: var(--r-lg); overflow: hidden; position: relative; color: oklch(98% 0 0); padding: var(--s-6); display: flex; flex-direction: column; justify-content: space-between; min-height: 260px; }
   .premium-card::before { content: ''; position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; }
   .premium-card::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, oklch(0% 0 0 / 0.1) 0%, oklch(0% 0 0 / 0.55) 100%); }
   .premium-card > * { position: relative; z-index: 2; }
   .premium-card.is-prem::before { background-image: url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1400&q=80'); }
   .premium-card.is-last::before { background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1400&q=80'); }
+  .premium-card.is-discount { background: linear-gradient(160deg, var(--brand-deep) 0%, var(--brand) 100%); }
+  .premium-card.is-discount::before, .premium-card.is-discount::after { display: none; }
+  .premium-card.is-finish::before { background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1400&q=80'); }
+  .premium-card.is-master::before { background-image: url('assets/img/zhk/keruen-02.jpg'); }
+  .premium-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; opacity: 0.95; }
+  .premium-sub { font-size: 13px; line-height: 1.45; color: oklch(98% 0 0 / 0.86); margin: 12px 0 0; max-width: 30ch; }
+  .premium-body { display: flex; flex-direction: column; }
   .premium-title { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin: 0; }
   .premium-arrow { align-self: end; width: 44px; height: 44px; border-radius: 50%; background: oklch(98% 0 0); color: var(--ink); display: grid; place-items: center; }
 
@@ -565,13 +572,28 @@
     .sect-projects .actions-row { display: flex; gap: 8px; flex-wrap: wrap; }
     .sect-projects .actions-row .btn { flex: 1; min-width: 0; font-size: 13px; padding: 10px 12px; }
     .sect-title { text-align: left; }
-    /* === Ипотека — калькулятор первым, без длинных буллетов === */
+    /* === Ипотека — только калькулятор; описание скрыто (по запросу PM) === */
     .mortgage-grid { display: flex; flex-direction: column; gap: var(--s-5); }
-    .mortgage .mort-card { order: 1; }
-    .mortgage .mortgage-info { order: 2; text-align: center; }
-    .mortgage .mortgage-info p { margin-left: auto; margin-right: auto; }
-    .mortgage .mort-bullets { display: none; }
+    .mortgage .mortgage-info { display: none; }
     .mortgage h2 { font-size: 26px; }
+    /* === Заголовки секций — бренд справа === */
+    .sect-projects-row1 .sect-title-txt { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; width: 100%; flex-wrap: wrap; }
+    .sect-projects-row1 .sect-title-brand { flex: 0 0 auto; color: var(--brand); }
+    /* === Промо — 3 карточки → горизонтальная карусель, бренд-цвет на is-discount === */
+    .premium-grid { grid-template-columns: none !important; }
+    .premium-card { min-height: 220px; }
+    .premium-title { font-size: 24px; }
+    .premium-sub { font-size: 12px; }
+    /* === Футер — компактно: только лого, телефон, контакты, соцсети === */
+    .foot .foot-grid > div:first-child > p,
+    .foot .foot-search,
+    .foot .foot-col:nth-of-type(2) ul li:nth-child(n+5),
+    .foot-bottom-disclaimer,
+    .foot-bottom > span:first-child { display: none !important; }
+    .foot .foot-grid { gap: var(--s-5); }
+    .foot .foot-col h4 { font-size: 13px; margin-bottom: var(--s-3); }
+    .foot .foot-col ul { gap: 6px; }
+    .foot .foot-col a { font-size: 12px; }
     /* === Способы покупки — компактнее === */
     .buy-card { padding: var(--s-4); }
     .buy-card h3 { font-size: 15px; }
