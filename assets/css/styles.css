@@ -1003,7 +1003,7 @@
   @media (max-width: 760px) {
     .home-hero { min-height: 100svh; align-items: flex-end; }
     .home-hero::before { height: 120px; }
-    .home-hero-inner { padding: 0 20px 92px; }
+    .home-hero-inner { padding: 0 20px 92px; text-align: center; }
     .home-hero .hh-scrim { background: linear-gradient(180deg, oklch(0% 0 0 / 0.42) 0%, oklch(0% 0 0 / 0.1) 42%, oklch(0% 0 0 / 0.78) 100%); }
     .hh-title { font-size: clamp(36px, 9.5vw, 50px); }
     .hh-meta { font-size: 12px; line-height: 1.45; }
