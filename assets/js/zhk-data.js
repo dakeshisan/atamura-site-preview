@@ -30,12 +30,16 @@ window.ATAMURA_ZHK = [
     ],
     "address": "мкр. Нуршашкан, ул. Алатау, 36",
     "statusDetail": "",
-    "hero_image": "assets/img/zhk/atmosfera-real.jpg",
+    "hero_image": "assets/img/zhk/atmosfera/a-005.jpg",
     "gallery": [
-      "assets/img/zhk/atmosfera-real-2023.jpg",
-      "assets/img/zhk/atmosfera.jpg"
+      "assets/img/zhk/atmosfera/b-001.jpg",
+      "assets/img/zhk/atmosfera/a-002.jpg",
+      "assets/img/zhk/atmosfera/a-008.jpg",
+      "assets/img/zhk/atmosfera/b-005.jpg",
+      "assets/img/zhk/atmosfera/a-010.jpg",
+      "assets/img/zhk/atmosfera/b-008.jpg"
     ],
-    "realPhotos": 3,
+    "realPhotos": 20,
     "site": "https://atmo.atamuragroup.kz",
     "draft": false
   },
@@ -69,12 +73,13 @@ window.ATAMURA_ZHK = [
     "statusDetail": "строится; 2-я очередь — сдача во II кв. 2026",
     "hero_image": "assets/img/zhk/aura.jpg",
     "gallery": [
-      "https://static.tildacdn.pro/tild6636-3162-4331-a236-343861303563/1-6.jpg",
-      "https://static.tildacdn.pro/tild6265-3731-4533-a661-343463313861/03-1.jpg",
-      "https://static.tildacdn.pro/tild3239-3236-4136-b662-316161373938/04.jpg",
-      "https://static.tildacdn.pro/tild3430-3638-4162-b230-376164656666/05.jpg"
+      "assets/img/zhk/aura/001.jpg",
+      "assets/img/zhk/aura/005.jpg",
+      "assets/img/zhk/aura/008.jpg",
+      "assets/img/zhk/aura/012.jpg",
+      "assets/img/zhk/aura/015.jpg"
     ],
-    "realPhotos": 7,
+    "realPhotos": 16,
     "site": "https://aura.atamuragroup.kz",
     "draft": false
   },
@@ -104,11 +109,18 @@ window.ATAMURA_ZHK = [
     ],
     "address": "ул. Жамакаева, 155",
     "statusDetail": "",
-    "hero_image": "assets/img/zhk/monarch.jpg",
-    "gallery": [],
-    "realPhotos": 1,
+    "hero_image": "assets/img/zhk/monarch/001.jpg",
+    "gallery": [
+      "assets/img/zhk/monarch/002.jpg",
+      "assets/img/zhk/monarch/004.jpg",
+      "assets/img/zhk/monarch/006.jpg",
+      "assets/img/zhk/monarch/010.jpg",
+      "assets/img/zhk/monarch/015.jpg",
+      "assets/img/zhk/monarch/018.jpg"
+    ],
+    "realPhotos": 20,
     "site": "https://monar.atamuragroup.kz",
-    "draft": true
+    "draft": false
   },
   {
     "slug": "keruen",
@@ -291,11 +303,18 @@ window.ATAMURA_ZHK = [
     ],
     "address": "ул. Сырым батыра, 80",
     "statusDetail": "",
-    "hero_image": "assets/img/zhk/arlan.jpg",
-    "gallery": [],
-    "realPhotos": 1,
+    "hero_image": "assets/img/zhk/arlan/001.jpg",
+    "gallery": [
+      "assets/img/zhk/arlan/003.jpg",
+      "assets/img/zhk/arlan/005.jpg",
+      "assets/img/zhk/arlan/008.jpg",
+      "assets/img/zhk/arlan/012.jpg",
+      "assets/img/zhk/arlan/015.jpg",
+      "assets/img/zhk/arlan/018.jpg"
+    ],
+    "realPhotos": 20,
     "site": "https://arlan.atamuragroup.kz",
-    "draft": true
+    "draft": false
   },
   {
     "slug": "amaia",
