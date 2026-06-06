@@ -174,6 +174,9 @@
   .logo-text { display: none; }
   /* small variant for footer */
   .logo.is-sm .logo-img { height: 40px; min-width: 0; } /* футер: снять min-width, иначе узкое лого растягивается (сплющивается) */
+  /* В drawer (мобильное меню) логотип без рамки/outline и без min-width-ghost-box */
+  .drawer .logo { border: 0; outline: 0; }
+  .drawer .logo-img { border: 0; outline: 0; min-width: 0; height: 44px; }
 
   /* nav */
   .nav-main { display: flex; gap: clamp(8px, 1vw, 16px); align-items: center; font-size: 13px; font-weight: 500; }
@@ -903,9 +906,9 @@
   .pagehero-lead { font-size: clamp(15px,1.4vw,18px); color: oklch(98% 0 0 / .88); max-width: 64ch; margin: var(--s-4) 0 0; }
 
   .zk-section { padding-block: clamp(40px,6vw,80px); }
-  .zk-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-3); margin-bottom: var(--s-8); }
-  .zk-stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-5); }
-  .zk-stat strong { display: block; font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; line-height: 1.2; }
+  .zk-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-4); margin-bottom: var(--s-8); }
+  .zk-stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s-5) var(--s-6); }
+  .zk-stat strong { display: block; font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; line-height: 1.2; word-wrap: break-word; }
   .zk-stat span { font-size: 13px; color: var(--ink-mute); margin-top: 6px; display: block; }
 
   .zk-layout { display: grid; grid-template-columns: 1.55fr 1fr; gap: clamp(28px,4vw,56px); align-items: start; }
@@ -1021,13 +1024,13 @@
   @media (max-width: 980px) {
     .zk-layout, .content-grid { grid-template-columns: 1fr; }
     .zk-aside { position: static; }
-    .zk-stats, .stat-row { grid-template-columns: 1fr 1fr; }
+    .zk-stats, .stat-row { grid-template-columns: 1fr 1fr; gap: var(--s-3) var(--s-4); }
   }
   @media (max-width: 600px) {
     .zk-gallery { grid-template-columns: 1fr 1fr; }
     .zk-gallery .zk-gtile:first-child { grid-column: span 2; grid-row: span 1; }
     .feat-grid { grid-template-columns: 1fr; }
-    .zk-stats, .stat-row { grid-template-columns: 1fr 1fr; }
+    .zk-stats, .stat-row { grid-template-columns: 1fr 1fr; gap: var(--s-3) var(--s-4); }
   }
 
   /* ============ КАТАЛОГ КВАРТИР (/flats) ============ */
