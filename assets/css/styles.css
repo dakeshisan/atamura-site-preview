@@ -670,7 +670,7 @@
     .content .content-grid > div > h2 { text-align: center; }
     .content .content-grid > div > p { text-align: justify; hyphens: auto; word-spacing: -0.02em; }
     .content .content-grid > div > .pagehero-cta { justify-content: center; }
-    .home .head.over { top: 0 !important; }
+    .home .head.over { top: max(16px, env(safe-area-inset-top)) !important; }
     /* Hero на мобайле — полноэкранный, но с местом под трастбар внизу.
        calc(100vh - 66px bottom-nav - 80px trustbar - safe-area) ≈ заполняет всё кроме нижнего таб-бара и трастбара.
        Контент (h1 + акция + кнопка) — внизу через flex/justify-end, чтобы фото было видно сверху. */
