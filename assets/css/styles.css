@@ -667,9 +667,10 @@
        под трастбар без скролла. Hero оставляем стандартного порядка, уменьшаем min-height. */
     .home .util { display: none !important; }
     .home .head.over { top: 0 !important; }
-    /* Hero на мобайле — короче, чтобы трастбар (КЖК / 2016 / 2000+ / 200 000+ м²) видно сразу */
+    /* Hero на мобайле — полноэкранный, но с местом под трастбар внизу.
+       calc(100vh - 66px bottom-nav - 80px trustbar) ≈ заполняет всё кроме нижнего таб-бара и трастбара. */
     .home .home-hero { min-height: 0 !important; }
-    .home .home-hero-inner { min-height: 60vh; padding-block: var(--s-7) var(--s-5); }
+    .home .home-hero-inner { min-height: calc(100vh - 220px); padding-block: var(--s-7) var(--s-5); }
     /* === Жилые комплексы — горизонтальная snap-карусель (level.ru-style) === */
     .sect-projects .grid-3 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 12px; padding-bottom: 8px; scroll-padding-left: 4px; }
     .sect-projects .grid-3 > * { flex: 0 0 86%; scroll-snap-align: start; }
