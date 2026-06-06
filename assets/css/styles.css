@@ -639,6 +639,9 @@
     .burger { display: none !important; }
     .head:not(.over) { position: static !important; box-shadow: none !important; backdrop-filter: none !important; }
     .head.over.is-stuck { position: absolute !important; top: 48px !important; background: transparent !important; border-bottom: 0 !important; box-shadow: none !important; backdrop-filter: none !important; }
+    /* На мобайле в шапке остался только лого (бургер скрыт, телефон/lang/icon тоже) — центрируем его */
+    .head-row { display: flex !important; justify-content: center !important; align-items: center !important; }
+    .head-row .head-utils { display: none !important; }
     body { padding-bottom: 66px; }
     /* Чище мобильный герой (по level.ru): прячем форму поиска, оставляем одну кнопку */
     .home-hero .herosearch { display: none; }
