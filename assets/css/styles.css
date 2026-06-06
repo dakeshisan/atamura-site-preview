@@ -501,9 +501,10 @@
   .news-title { font-size: 14px; font-weight: 600; line-height: 1.35; color: var(--ink); margin: 0; }
 
   /* ============ CATALOG-CTA BAND (под героем / на странице ЖК) ============ */
-  .catalog-band { background: var(--brand); color: var(--brand-on); padding-block: clamp(40px, 6vw, 80px); position: relative; overflow: hidden; }
+  .catalog-section { background: var(--bg); padding-block: clamp(32px, 4vw, 56px); }
+  .catalog-band { background: var(--brand); color: var(--brand-on); padding: clamp(36px, 5vw, 64px) clamp(28px, 4vw, 56px); border-radius: var(--r-lg); position: relative; overflow: hidden; box-shadow: 0 14px 36px oklch(0% 0 0 / 0.08); }
   .catalog-band::before { content: ""; position: absolute; right: -40px; top: -40px; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle at center, rgba(207,179,114,0.18), transparent 70%); pointer-events: none; }
-  .catalog-band-inner { display: grid; grid-template-columns: 1.4fr auto; align-items: center; gap: var(--s-7); position: relative; z-index: 1; }
+  .catalog-band-inner { display: grid; grid-template-columns: 1.4fr auto; align-items: center; gap: var(--s-6); position: relative; z-index: 1; }
   .catalog-band-text { max-width: 60ch; }
   .catalog-eyebrow { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 var(--s-3); }
   .catalog-band h2 { font-family: "Cormorant", Georgia, serif; font-size: clamp(28px, 3.4vw, 44px); font-weight: 600; line-height: 1.05; letter-spacing: -0.015em; margin: 0 0 var(--s-3); color: var(--brand-on); }
