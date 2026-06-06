@@ -683,7 +683,7 @@
     .premium-card { text-align: center; }
     .premium-card .premium-body { align-items: center; }
     .premium-card .premium-sub { margin-left: auto; margin-right: auto; }
-    .premium-tag { left: 50%; right: auto; transform: translateX(-50%); }
+    .premium-tag { position: static; transform: none; align-self: center; margin: 0 0 var(--s-3); }
     .premium-arrow { margin: 12px auto 0; }
     /* Mortgage h2 уже скрыт (mortgage-info display:none), но если показывается — центру */
     .mortgage h2 { text-align: center; }
@@ -706,7 +706,8 @@
     .foot .foot-grid { text-align: center; }
     .foot .foot-col h4 { text-align: center; }
     .foot .foot-col ul { display: flex; flex-direction: column; align-items: center; }
-    .foot .foot-col-projects ul { display: grid; grid-template-columns: 1fr 1fr; gap: 8px var(--s-5); justify-items: center; max-width: 320px; margin: 0 auto; }
+    .foot .foot-col-projects ul,
+    .foot .foot-col-purchase ul { display: grid; grid-template-columns: 1fr 1fr; gap: 8px var(--s-5); justify-items: center; max-width: 320px; margin: 0 auto; }
     .foot .foot-grid > div:first-child > a.logo { justify-content: center; }
     .foot .foot-grid > div:first-child .foot-phone,
     .foot .foot-grid > div:first-child .foot-hours { text-align: center; }
