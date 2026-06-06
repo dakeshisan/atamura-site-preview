@@ -660,6 +660,16 @@
     /* Трастбар — компактная прокрутка */
     .trustbar-row { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 16px; -webkit-overflow-scrolling: touch; }
     .trustbar .tb-item { flex: 0 0 auto; white-space: nowrap; }
+    /* На мобайле трастбар (КЖК / 2016 / 2000+ / 200 000+ м²) — НАД героем, чтобы был на 1-м экране.
+       margin-top компенсирует absolute-шапку (segment-nav 48px + header logo ~40px ≈ 88px). */
+    .home main#main { display: flex; flex-direction: column; }
+    .home main#main > .trustbar { order: -1; margin-top: 132px; }
+    /* Шапка теперь над кремовым (а не тёмным героем) — белый текст/лого инвертируем в тёмный */
+    .home .util.over { background: transparent !important; }
+    .home .util.over, .home .util.over a { color: var(--ink) !important; }
+    .home .util.over .city svg { color: var(--accent-deep) !important; }
+    .home .head.over .logo-w { display: none !important; }
+    .home .head.over .logo-n { display: block !important; }
     /* === Жилые комплексы — горизонтальная snap-карусель (level.ru-style) === */
     .sect-projects .grid-3 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 12px; padding-bottom: 8px; scroll-padding-left: 4px; }
     .sect-projects .grid-3 > * { flex: 0 0 86%; scroll-snap-align: start; }
