@@ -127,6 +127,72 @@
     });
   })();
 
+  /* ---------- Catalog popup (form → auto-download PDF → success-стадия) ----------
+     Без бэкенда. Лид сохраняется в localStorage (atamura_leads) до момента подключения Bitrix24. */
+  (function () {
+    var pop = byId("catalogPopup");
+    if (!pop) return;
+    var form = pop.querySelector(".catalog-form");
+    var stageForm = pop.querySelector('[data-catalog-stage="form"]');
+    var stageOk = pop.querySelector('[data-catalog-stage="success"]');
+    var srcField = form ? form.querySelector('input[name="catalog_source"]') : null;
+    var nameInput = form ? form.querySelector('input[name="name"]') : null;
+    var phoneInput = form ? form.querySelector('input[name="phone"]') : null;
+    var honeyInput = form ? form.querySelector('input[name="company"]') : null;
+    var redownload = stageOk ? stageOk.querySelector('[data-catalog-redownload]') : null;
+    if (form) bindPhones(form);
+    var catalogHref = rel("catalog/atamura-catalog.pdf");
+    if (redownload) redownload.setAttribute("href", catalogHref);
+
+    /* Open: делегируем клик по [data-open-catalog] (для динамической карточки на /zk/<slug>) */
+    document.addEventListener("click", function (e) {
+      var btn = e.target.closest && e.target.closest("[data-open-catalog]");
+      if (!btn) return;
+      e.preventDefault();
+      if (srcField) srcField.value = btn.getAttribute("data-catalog-source") || "unknown";
+      if (stageForm) stageForm.hidden = false;
+      if (stageOk) stageOk.hidden = true;
+      pop.classList.add("is-on");
+      track("catalog_open", { source: srcField ? srcField.value : "unknown" });
+      setTimeout(function () { if (nameInput) nameInput.focus(); }, 80);
+    });
+
+    if (!form) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      /* Honeypot — бот заполнит, человек не увидит. */
+      if (honeyInput && honeyInput.value) return;
+      var nm = (nameInput.value || "").trim();
+      if (nm.length < 2) { showFieldError(nameInput, "Введите имя (минимум 2 буквы)"); nameInput.focus(); return; }
+      if (!phoneValid(phoneInput.value)) { showFieldError(phoneInput, "Введите номер: +7 7XX XXX-XX-XX"); phoneInput.focus(); return; }
+
+      var data = {};
+      new FormData(form).forEach(function (v, k) { if (k !== "company") data[k] = v; });
+      data.source = "catalog-" + (srcField ? srcField.value : "unknown");
+      data.page = location.pathname;
+      data.ref = document.referrer || "прямой заход";
+      data.utm = location.search || "";
+      data.ts = new Date().toISOString();
+      try {
+        var q = JSON.parse(localStorage.getItem("atamura_leads") || "[]");
+        q.push(data);
+        localStorage.setItem("atamura_leads", JSON.stringify(q));
+      } catch (e2) {}
+      track("catalog_submit", { source: data.source, page: data.page });
+
+      /* Переключаем стадию + автоскачивание PDF */
+      stageForm.hidden = true;
+      stageOk.hidden = false;
+      var dl = document.createElement("a");
+      dl.href = catalogHref;
+      dl.download = "atamura-catalog.pdf";
+      dl.rel = "noopener";
+      document.body.appendChild(dl);
+      dl.click();
+      setTimeout(function () { if (dl.parentNode) dl.parentNode.removeChild(dl); }, 0);
+    });
+  })();
+
   /* ---------- Телефон: маска + валидация ---------- */
   function formatPhone(v) {
     var d = v.replace(/\D/g, "");
@@ -241,6 +307,13 @@
       '<div class="zk-maplinks"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 1.6c2.9 0 5.3 2.4 5.3 5.3 0 4-5.3 9.5-5.3 9.5S3.7 10.9 3.7 6.9C3.7 4 6.1 1.6 9 1.6z"/><circle cx="9" cy="6.9" r="2"/></svg><span class="zk-maplinks-label">Открыть на карте:</span><a href="https://2gis.kz/almaty/search/' + mapQ + '" target="_blank" rel="noopener">2GIS</a><a href="https://www.google.com/maps/search/?api=1&query=' + mapQ + '" target="_blank" rel="noopener">Google&nbsp;Maps</a><a href="https://yandex.ru/maps/?text=' + mapQ + '" target="_blank" rel="noopener">Яндекс</a></div>' +
       (near.length ? '<h3 class="zk-h3">Инфраструктура и дорога</h3><div class="feat-grid">' + featList(near) + "</div>" : ""));
     var planBlock = softBlock("Генплан и планировки", "Генплан территории и планировки квартир под вашу комнатность пришлём по запросу — нажмите «Получить подборку», менеджер вышлет PDF.");
+    var catalogCard = '<div class="catalog-card">' +
+      '<div class="catalog-card-text">' +
+        '<h3>Каталог по ЖК ' + z.name + ' и соседним</h3>' +
+        '<p>Цены, площади, ипотечные программы и рассрочка 0% — на одном PDF. Менеджер ATAMŪRA свяжется в WhatsApp в течение 7 минут.</p>' +
+      '</div>' +
+      '<button type="button" class="btn btn-accent" data-open-catalog data-catalog-source="zk-' + z.slug + '">Забрать каталог</button>' +
+    '</div>';
     var progressBlock = softBlock("Ход строительства", "Фотоотчёт хода строительства обновляем регулярно — актуальные фото пришлёт менеджер, следите за обновлениями в Instagram @atamura.group.");
     var docsBlock = softBlock("Документы", "Разрешительные документы (проектная декларация, разрешение на строительство, договор) предоставляем по запросу в отделе продаж.");
     var blob = (H.join(" ") + " " + (z.description || "")).toLowerCase();
@@ -292,6 +365,7 @@
             (z.draft ? '<div class="note">Фото комплекса — иллюстративные: финальные рендеры добавим позже. Описание и характеристики — по данным застройщика.</div>' : "") +
             locBlock +
             planBlock +
+            catalogCard +
             featBlock("Архитектура и материалы", arch) +
             featBlock("Благоустройство", land) +
             featBlock("Безопасность", sec) +
