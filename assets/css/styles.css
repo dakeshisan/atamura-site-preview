@@ -668,9 +668,10 @@
     .home .util { display: none !important; }
     .home .head.over { top: 0 !important; }
     /* Hero на мобайле — полноэкранный, но с местом под трастбар внизу.
-       calc(100vh - 66px bottom-nav - 80px trustbar) ≈ заполняет всё кроме нижнего таб-бара и трастбара. */
+       calc(100vh - 66px bottom-nav - 80px trustbar - safe-area) ≈ заполняет всё кроме нижнего таб-бара и трастбара.
+       Контент (h1 + акция + кнопка) — внизу через flex/justify-end, чтобы фото было видно сверху. */
     .home .home-hero { min-height: 0 !important; }
-    .home .home-hero-inner { min-height: calc(100vh - 220px); padding-block: var(--s-7) var(--s-5); }
+    .home .home-hero-inner { min-height: calc(100vh - 180px); display: flex; flex-direction: column; justify-content: flex-end; padding-block: var(--s-5) var(--s-5); gap: var(--s-3); }
     /* === Жилые комплексы — горизонтальная snap-карусель (level.ru-style) === */
     .sect-projects .grid-3 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 12px; padding-bottom: 8px; scroll-padding-left: 4px; }
     .sect-projects .grid-3 > * { flex: 0 0 86%; scroll-snap-align: start; }
